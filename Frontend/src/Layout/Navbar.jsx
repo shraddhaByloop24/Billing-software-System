@@ -25,11 +25,7 @@ const Navbar = () => {
 
 
   // const [foodList, setFoodList] = useState([]);
-
-
-
-
-  useEffect(() => {
+   useEffect(() => {
       fetchFoods();
       fetchFoodList();
   }, []);
@@ -62,7 +58,6 @@ const Navbar = () => {
       food.foodcategory.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-
   return (
     <div>
       <ul className="navbar-nav fixed-left sidebar sidebar-dark accordion shadow" id="accordionSidebar">
@@ -82,15 +77,19 @@ const Navbar = () => {
               <i className={`fas fa-angle-${isDropdownOpen ? 'down' : 'right'} ml-auto text-white `}></i>
             </div>
           </a>
-          {foodList.map((food) => (
+          {/* {filteredFoods.map((food, index) => ( */}
           <div  className={`collapse ${isDropdownOpen ? 'show' : '.'} dropdown_menu-1 fade-In`} aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div className="text-white py-0 collapse-inner " key={food._id} >
+            <div className="text-white py-0 collapse-inner ">{ /*key={food._id*/} 
               <div className=" text-white food-arrange ">{/* onSubmit={handleSubmit}*/}
                 <ul className="input-text p-0  nav-food-header " name="foodcategory">
-                  <li>
-                    <Link to="/burger" className='nav-food text-white'>  {food.foodname}</Link>
-                  </li>
-                  <li>
+               
+
+                <li>
+                    {/* <Link to="/burger" className='nav-food text-white'>  {food.subcategorys} </Link> */}
+                    <Link to="/burger" className='nav-food text-white'>  Burger</Link>
+
+                  </li> 
+                 <li>
                     <Link to="/pizza" className='nav-food text-white'> Pizza</Link>
                   </li>
                   <li>
@@ -98,7 +97,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link to="/chineese" className='nav-food text-white'> chineese</Link>
-                  </li>
+                  </li> 
                 </ul>
 
 
@@ -115,7 +114,7 @@ const Navbar = () => {
               <div className="collapse-divider " />
             </div>
           </div>
-             ))} 
+            {/* //  ))}  */}
         </li>
         <li>
 

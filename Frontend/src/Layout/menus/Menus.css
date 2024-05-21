@@ -1,3 +1,12 @@
 .items-ul{
     list-style-type: none;
 }
+.items-name{
+    font-size: 18px;
+}
+.items-menu-name{
+    font-size: 16px;
+}
+.items-align{
+    list-style-type: none;
+}

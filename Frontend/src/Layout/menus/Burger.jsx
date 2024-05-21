@@ -57,35 +57,19 @@ const Burger = () => {
                             <div className="card border-left-primary shadow h-100 py-2">
                                 <div className="card-body p-0 px-3">
                                     <div className="row no-gutters align-items-center">
-                                        <div className="col-lg-12 mr-2">
-                                            <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        <div className="col-lg-10 mr-2">
+                                            <div className="text-xs text-primary text-capitalize mb-1">
                                                 <div key={food._id} className='items-ul'>
-                                                <div className="h6 display-5 mb-0 font-weight-bold text-gray-800">{food.name}</div>
-                                                <div className="h6 mb-0 font-weight-bold text-gray-800">{food.foodtype}</div>
-                                                <div className="h6 mb-0 font-weight-bold text-gray-800">{food.discount}%</div>
-
-                                                    {/* <li className='p-0  pt-2'>
-                                                        {editMode && editedFood._id === food._id ? (
-                                                            <select className="input-text" value={editedFood.foodcategory} onChange={(e) => setEditedFood({ ...editedFood, foodcategory: e.target.value })}>
-                                                                <option value="">Select Food Category</option>
-                                                                {foodList.map(food => (
-                                                                    <option key={food._id} value={food.foodname}>{food.foodname}</option>
-                                                                ))}
-                                                            </select>
-                                                        ) : (
-                                                            food.foodcategory
-                                                        )}
-                                                    </li> */}
-                                                    {/* <li className='p-0 px-2 pt-2'></li> */}
-
-
-                                            </div>
-                                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                                ${food.price}
+                                                <div className="items-name mb-0 font-weight-bold  text-primary font-weight-bold ">{food.name}</div>
+                                                <ul className='d-flex items-align'>
+                                                <li className="items-menu-name mb-0 font-weight-bold text-gray-800 ">{food.foodtype}</li>
+                                                <li className="items-menu-name mb-0 font-weight-bold text-gray-800 px-2">{food.discount}%</li>
+                                                <li className="items-menu-name mb-0 font-weight-bold text-gray-800 ">${food.price}</li>
+                                                </ul>
                                             </div>
                                             </div>
                                         </div>
-                                        <div className="col-auto">
+                                        <div className="col-lg-1">
                                             <i className="fas fa-calendar fa-2x text-gray-300" />
                                         </div>
                                     </div>

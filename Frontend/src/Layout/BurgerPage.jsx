@@ -67,12 +67,12 @@ const BurgerPage = () => {
                 </a>
               </div>
               <div className="row">
-              {filteredFoods.map((food, index) => (
+              {/* {filteredFoods.map((food, index) => ( */}
                 <div className="col-xl-12 col-lg-12 ">
                   <div className="card shadow mb-4">
                     <div className="card-header py-3 flex-row align-items-center justify-content-between">
                       <section className="mt-2 ">
-                      <div className="h6 display-5 mb-0 font-weight-bold text-gray-800">{food.name}</div>
+                    
                        <Burger />
                       
                       {/* <form
@@ -196,7 +196,7 @@ const BurgerPage = () => {
                     </div>
                   </div>
                 </div>
-                    ))}
+                    {/* ))} */}
 
 
               </div>
