@@ -77,7 +77,7 @@ const Addproducts = () => {
             <Header />      
             <div className="container-fluid">
               <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 className="h3 mb-0 text-gray-800">Add Products</h1>
                 <a
                   href="#"
                   className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
@@ -164,21 +164,21 @@ const Addproducts = () => {
                             </label>
                           </div>
 
-                          <div className="form-field col-lg-6 ">
-                            <select
-                              className="input-text"
-                              name="foodtype"
-                              value={foodtype}
-                              onChange={(e) => setFoodtype(e.target.value)}
-                            >
-                              <option value=""></option>
-                              <option value="veg">Veg</option>
-                              <option value="nonVeg">Non-Veg</option>
-                            </select>
-                            <label className="label" htmlFor="">
-                              Food Type
-                            </label>
-                          </div>
+                            <div className="form-field col-lg-6 ">
+                              <select
+                                className="input-text"
+                                name="foodtype"
+                                value={foodtype}
+                                onChange={(e) => setFoodtype(e.target.value)}
+                              >
+                                <option value=""></option>
+                                <option value="veg">Veg</option>
+                                <option value="nonVeg">Non-Veg</option>
+                              </select>
+                              <label className="label" htmlFor="">
+                                Food Type
+                              </label>
+                            </div>
                           <div className="form-field col-lg-6">
                             <input
                               name="description"

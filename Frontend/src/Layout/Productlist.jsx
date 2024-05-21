@@ -60,11 +60,10 @@ const Productlist = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          // Proceed with the deletion if the user confirms
+          
           await axios.delete(`http://localhost:3001/food/${id}`);
           console.log('Food item deleted successfully:', id);
-          // Show a success SweetAlert
-          Swal.fire(
+            Swal.fire(
             'Deleted!',
             'Your data has been deleted.',
             'success'
@@ -205,6 +204,20 @@ const Productlist = () => {
         </div>
       </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       {/* Modal for editing food item */}
       <div className="modal fade" id="editModal" tabIndex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div className="modal-dialog">
@@ -213,9 +226,8 @@ const Productlist = () => {
               <h5 className="modal-title" id="editModalLabel">Edit Food</h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {/* // Inside the modal body */}
             <div className="modal-body">
-              <h2>Edit Food</h2>
+              <h6>Edit Food</h6>
               <form className='editforms p-0'>
                 <div className='p-0'>
                   <label htmlFor="name">Name:</label>

@@ -50,10 +50,10 @@ const Editmenu = ({ food, fetchFoods }) => {
 
   return (
     <div>
-      <h2>Edit Food</h2>
+      <h6>Edit Food</h6>
       <form className='editforms p-0'>
         <div className='p-0'>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             id="name"

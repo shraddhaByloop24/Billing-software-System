@@ -58,12 +58,8 @@ const BurgerPage = () => {
               
               <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-                <a
-                  href="#"
-                  className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                >
-                  <i className="fas fa-download fa-sm text-white-50" />{' '}
-                  Generate Report
+                <a href="/Addproducts"className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                   <i className="fa-solid fa-plus"></i>
                 </a>
               </div>
               <div className="row">
@@ -71,10 +67,8 @@ const BurgerPage = () => {
                 <div className="col-xl-12 col-lg-12 ">
                   <div className="card shadow mb-4">
                     <div className="card-header py-3 flex-row align-items-center justify-content-between">
-                      <section className="mt-2 ">
-                    
+                     <section className="mt-2 ">
                        <Burger />
-                      
                       {/* <form
                         className="contact-form row p-0"
                         onSubmit={handleSubmit}
@@ -190,8 +184,6 @@ const BurgerPage = () => {
                           </div>
                         </div>
                       </form> */}
-                   
-
                       </section>
                     </div>
                   </div>

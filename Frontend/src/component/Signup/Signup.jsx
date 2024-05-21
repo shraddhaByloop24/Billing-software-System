@@ -30,7 +30,7 @@ const Signup = () => {
             <div className="col-lg-7  reg-back d-flex justify-content-center align-items-center">
               <div className="row ">
                 <div className="col-lg-12 ">
-                  <img src="/image/reg3.png" className='img-fluid reg-img-height ' alt="" />
+                  {/* <img src="/image/reg3.png" className='img-fluid reg-img-height ' alt="" /> */}
                 </div>
                 {/* <div className="col-lg-6 p-0"> <img src="/image/dish1.png" className='img-fluid reg1' alt="" /> </div>
               <div className="col-lg-6 p-0"> <img src="/image/reg1.png" className='img-fluid reg2' alt="" /> </div> */}
