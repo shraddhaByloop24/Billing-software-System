@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const { default: Subcategory } = require('../../Frontend/src/Layout/Subcategory');
 
 const FoodSchema = new mongoose.Schema({
   name: {
@@ -12,16 +11,15 @@ const FoodSchema = new mongoose.Schema({
   },
   foodtype: {
     type: String,
-    enum: ['', 'veg', 'nonVeg'],
+    enum: ['veg', 'nonVeg'],
     default: 'veg',
     required: true
   },
-
   foodcategory: {
     type: String,
     required: true
-  },  
-  subcategorys:{
+  },
+  subcategorys: {
     type: String,
     required: true
   },
@@ -29,14 +27,24 @@ const FoodSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  discount:{
-    type:Number,
-    require: true
+  discount: {
+    type: Number,
+    required: true
   },
   foodimg: {
     type: String,
     required: true
-  }
+  },
+  customFields: [{
+    cname: {
+      type: String,
+      required: false
+    },
+    cprice: {
+      type: Number,
+      required: false
+    }
+  }]
 });
 
 const Food = mongoose.model('Food', FoodSchema);

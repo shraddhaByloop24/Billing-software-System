@@ -75,7 +75,8 @@ app.post('/food', async (req, res) => {
             subcategorys,
             description,
             discount,
-            foodimg
+            foodimg,
+            
         });
         await food.save();
         res.status(201).json({ message: 'Food item created successfully', data: food });
@@ -113,7 +114,7 @@ app.get('/food/:id', async (req, res) => {
 // Update a food item by ID
 app.put('/food/:id', async (req, res) => {
     try {
-        const { name, price, description, foodtype, foodcategory,subcategorys, foodimg } = req.body;
+        const { name, price, description, foodtype, foodcategory,subcategorys, foodimg} = req.body;
         const food = await Food.findByIdAndUpdate(req.params.id, {
             name,
             price,

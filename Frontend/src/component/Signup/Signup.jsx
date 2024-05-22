@@ -20,7 +20,7 @@ const Signup = () => {
       .catch(err => console.log(err))
     navigate('/');
   }
-  // bacdropFilter
+
   return (
     <div className='container-fluid  '>
       <div className="sigup-clippy"></div>
@@ -32,8 +32,6 @@ const Signup = () => {
                 <div className="col-lg-12 ">
                   {/* <img src="/image/reg3.png" className='img-fluid reg-img-height ' alt="" /> */}
                 </div>
-                {/* <div className="col-lg-6 p-0"> <img src="/image/dish1.png" className='img-fluid reg1' alt="" /> </div>
-              <div className="col-lg-6 p-0"> <img src="/image/reg1.png" className='img-fluid reg2' alt="" /> </div> */}
               </div>
             </div>
 
@@ -95,18 +93,12 @@ const Signup = () => {
                     New on our platform?  <Link to="/" className='unique'>
                       if have already account</Link>
                   </span>
-
-
-
-
                 </div>
-
                 <div className=" d-grid gap-2 mt-2">
                   <button className="btn register-btn  p-2" type="submit">Submit</button>
                 </div>
               </form>
             </div>
-
           </div>
         </div>
       </div>

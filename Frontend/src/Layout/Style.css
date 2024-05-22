@@ -1,12 +1,13 @@
 /* header css */
-.header-menus li{
+.header-menus li {
   list-style-type: none;
 }
-.list-box{
+
+.list-box {
   position: absolute;
   top: 0;
   z-index: 11111;
-  
+
 }
 
 
@@ -16,33 +17,39 @@
   border-right: 10px solid white;
   /* background-image: linear-gradient(to top left ,#d63384, #dc3545, #fd2714,#ffc107d2) !important; */
 }
-.navbar{
+
+.navbar {
   background-color: navy !important;
   /* background-image: linear-gradient(to top  ,navy, rgba(0, 0, 0, 0.793)) !important; */
   /* background-image: linear-gradient(to top left ,#d63384, #dc3545, #fd2714,#ffc107d2) !important; */
 }
-.Appetizers{
+
+.Appetizers {
   font-size: 16px !important;
 }
-.nav-food{
+
+.nav-food {
 
   padding: 10px;
-  margin-top:5px ;
+  margin-top: 5px;
   list-style-type: none;
   text-align: left;
 }
-.nav-food-header li{
+
+.nav-food-header li {
   border-bottom: 1px solid rgba(184, 182, 182, 0.885);
   list-style-type: none;
   padding-bottom: 5px;
   padding-top: 10px;
 }
-.food-arrange{
+
+.food-arrange {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-top: -10px;
 }
+
 .menu {
   display: flex;
   justify-content: center;
@@ -92,18 +99,15 @@
   background-color: #2980b9;
 }
 
-/* // Menu Items Animated individually */
 .dropdown_menu-1 {
   animation: slideDown 300ms ease-in-out forwards;
 }
-.collapse-inner{
+
+.collapse-inner {
   background-color: navy;
-  /* border: 2px solid white; */
+
 }
-.collapse-inner li{
-  /* background-color: navy; */
-  /* border-bottom: 2px solid white; */
-}
+
 
 
 @keyframes slideDown {
@@ -111,68 +115,80 @@
     opacity: 0;
     transform: translateY(-60px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
-.editforms{
+
+.editforms {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.label{
+
+.label {
   color: black !important;
 }
-.search-icons{
-  position: relative; 
+
+.search-icons {
+  position: relative;
   top: 200px;
   right: 10%;
 }
-.search-icons{
+
+.search-icons {
   position: absolute;
 }
-.set-searchbar{
+
+.set-searchbar {
   display: flex;
   justify-content: flex-end;
   position: relative;
   width: 100%;
 }
-.fa-magnifying-glass{
+
+.fa-magnifying-glass {
   position: absolute;
   top: 13px;
   left: 47%;
 }
-.field{
+
+.field {
   border: none;
 }
-.sub-category{
+
+.sub-category {
   overflow: hidden !important;
 }
-   .sidebar-divider{
-    color: white;
-    background-color: white;
-    width: 180px;
-    height: auto;
-   }
-  .iii{
-    padding-left: 8px;
-  }
-   .sidenav-menu{
-    padding-bottom:20px ;
-    padding-left: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-   }
-   
+
+.sidebar-divider {
+  color: white;
+  background-color: white;
+  width: 180px;
+  height: auto;
+}
+
+.iii {
+  padding-left: 8px;
+}
+
+.sidenav-menu {
+  padding-bottom: 20px;
+  padding-left: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
 
 
 .get-in-touch {
   /* max-height: 00px; */
   margin: 50px auto;
- 
+
 
 }
 
@@ -181,6 +197,7 @@
   position: relative;
   margin: 32px 0;
 }
+
 .contact-form .input-text {
   display: block;
   width: 100%;
@@ -192,16 +209,18 @@
   line-height: 26px;
   font-weight: 400;
   padding-top: 14px;
-  /* margin-bottom: 10px; */
 }
+
 .contact-form .input-text:focus {
   outline: none;
 }
-.contact-form .input-text:focus + .label,
-.contact-form .input-text.not-empty + .label {
+
+.contact-form .input-text:focus+.label,
+.contact-form .input-text.not-empty+.label {
   -webkit-transform: translateY(-64px);
-          transform: translateY(-24px);
+  transform: translateY(-24px);
 }
+
 .contact-form .label {
   position: absolute;
   left: 20px;
@@ -213,29 +232,36 @@
   cursor: text;
   transition: -webkit-transform .2s ease-in-out;
   transition: transform .2s ease-in-out;
-  transition: transform .2s ease-in-out, 
-  -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out,
+    -webkit-transform .2s ease-in-out;
 }
+
 .contact-form .submit-btn {
   display: inline-block;
-  /* background-color: #000; */
-   /* background-image: linear-gradient(125deg,#a72879,#064497); */
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 16px;
   padding: 8px 16px;
   border: none;
-  width:200px;
+  width: 200px;
   cursor: pointer;
 }
 
-option{
-  border:none ;
+option {
+  border: none;
 }
-option:hover{
+
+option:hover {
   background-color: none;
 }
-.food-type{
+
+.food-type {
   font-size: 10px;
+}
+
+
+/*  Add Product Style*/
+.custom-product{
+  margin-top: 0px !important;
 }
