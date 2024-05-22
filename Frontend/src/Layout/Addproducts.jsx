@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Header from './Header';
 import Footer from './Footer';
-import './style.css'
-import Swal from "sweetalert2";
+import './style.css';
+import Swal from 'sweetalert2';
 
 const Addproducts = () => {
   const [name, setName] = useState('');
@@ -20,14 +20,32 @@ const Addproducts = () => {
   const [cname, setCname] = useState('');
   const [cprice, setCprice] = useState('');
   const [customFields, setCustomFields] = useState([]);
-  const [customproduct, setCustomproduct] = useState();
+  const [customproduct, setCustomproduct] = useState('');
 
-  const handleSubmits = (e) => {
+  const handleSubmits = async (e) => {
     e.preventDefault();
-    setCustomFields((prevCustomFields) => [...prevCustomFields, { cname, cprice }]);
-    setCname('');
-    setCprice('');
-    setShowModal(false);
+    try {
+      const response = await axios.post('http://localhost:3001/customproduct', {
+        cname,
+        cprice
+      });
+      setCustomFields((prevCustomFields) => [...prevCustomFields, response.data]);
+      setCname('');
+      setCprice('');
+      setShowModal(false);
+      Swal.fire(
+        'Submit!',
+        'Custom product added successfully.',
+        'success'
+      );
+    } catch (error) {
+      console.error('Error adding custom product:', error);
+      Swal.fire(
+        'Error!',
+        'There was an issue adding the custom product.',
+        'error'
+      );
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -58,10 +76,15 @@ const Addproducts = () => {
       setDescription('');
       setDiscount('');
       setFoodimg('');
-      setCustomFields('');
+      setCustomFields([]);
       fetchFoodList();
     } catch (error) {
       console.error('Error creating food item:', error);
+      Swal.fire(
+        'Error!',
+        'There was an issue creating the food item.',
+        'error'
+      );
     }
   };
 
@@ -210,12 +233,12 @@ const Addproducts = () => {
                             />
                           </div>
                           <div className="form-field col-lg-6">
-                          <label htmlFor="" className=''>
-                            <a
-                              type="button"
-                              className="custom-product p-0 text-dark"
-                              onClick={() => setShowModal(true)}>
-                              Custom Product + </a>
+                            <label htmlFor="" className=''>
+                              <a
+                                type="button"
+                                className="custom-product p-0 text-dark"
+                                onClick={() => setShowModal(true)}>
+                                Custom Product + </a>
                             </label>
                             <input
                               name="customproduct"
@@ -224,10 +247,8 @@ const Addproducts = () => {
                               value={customproduct}
                               onChange={(e) => setCustomproduct(e.target.value)}
                             />
-                           
                           </div>
                           <div className="form-field col-lg-6">
-                          
                             {/* Modal */}
                             <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1" role="dialog">
                               <div className="modal-dialog" role="document">
@@ -275,7 +296,6 @@ const Addproducts = () => {
                               <button className="btn btn-danger" type="submit">Submit</button>
                             </div>
                           </div>
-                          
                         </form>
                       </section>
                     </div>
