@@ -120,7 +120,7 @@ app.put('/food/:id', async (req, res) => {
             subcategorys,
             discount,
             foodimg,
-            customFields // Ensure this is an array of objects
+            customFields 
         }, { new: true });
 
         if (!food) {
@@ -156,6 +156,8 @@ app.get('/addfood', async (req, res) => {
     } catch (error) {
         console.error('Error fetching food items:', error);
         res.status(500).json({ error: 'Server error' });
+        
+        
     }
 });
 
