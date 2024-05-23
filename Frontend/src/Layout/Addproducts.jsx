@@ -4,100 +4,117 @@ import Navbar from './Navbar';
 import Header from './Header';
 import Footer from './Footer';
 import './style.css';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 const Addproducts = () => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [foodtype, setFoodtype] = useState('');
-  const [foodcategory, setFoodcategory] = useState('');
-  const [subcategorys, setSubcategorys] = useState('');
-  const [discount, setDiscount] = useState('');
-  const [description, setDescription] = useState('');
-  const [foodimg, setFoodimg] = useState('');
-  const [foodList, setFoodList] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [cname, setCname] = useState('');
-  const [cprice, setCprice] = useState('');
-  const [customFields, setCustomFields] = useState([]);
-  const [customproduct, setCustomproduct] = useState('');
-
-  const handleSubmits = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:3001/customproduct', {
-        cname,
-        cprice
-      });
-      setCustomFields((prevCustomFields) => [...prevCustomFields, response.data]);
-      setCname('');
-      setCprice('');
-      setShowModal(false);
-      Swal.fire(
-        'Submit!',
-        'Custom product added successfully.',
-        'success'
-      );
-    } catch (error) {
-      console.error('Error adding custom product:', error);
-      Swal.fire(
-        'Error!',
-        'There was an issue adding the custom product.',
-        'error'
-      );
+  const [formData, setFormData] = useState({
+    itemname: '',
+    description: '',
+    baseprice: '',
+    categoryId: '',
+    subcategoryId: '',
+    discount: '',
+    quantityavailable: '',
+    image: '',
+    cuisine: '',
+    foodtype: '',
+    customizations: [
+      {
+        customizationsType: '',
+        customizations: [
+          {
+            customizationName: '',
+            additionalprice: ''
+          }
+        ]
+      }
+    ],
+    filters: {
+      GlutenFree: '',
+      Spicy: ''
     }
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleCustomizationChange = (index, e) => {
+    const { name, value } = e.target;
+    const customizations = [...formData.customizations];
+    customizations[index][name] = value;
+    setFormData({
+      ...formData,
+      customizations
+    });
+  };
+
+  const addCustomization = () => {
+    setFormData({
+      ...formData,
+      customizations: [
+        ...formData.customizations,
+        {
+          customizationsType: '',
+          customizations: [
+            {
+              customizationName: '',
+              additionalprice: ''
+            }
+          ]
+        }
+      ]
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
     try {
-      const response = await axios.post('http://localhost:3001/food', {
-        name,
-        price,
-        foodtype,
-        foodcategory,
-        subcategorys,
-        description,
-        discount,
-        foodimg,
-        customFields
+      await axios.post('https://7c63-2405-201-301d-f83a-45c9-fb6f-ac2c-fafb.ngrok-free.app/products', formData);
+      setLoading(false);
+      setSuccess('Product added successfully!');
+      setFormData({
+        itemname: '',
+        description: '',
+        baseprice: '',
+        categoryId: '',
+        subcategoryId: '',
+        discount: '',
+        quantityavailable: '',
+        image: '',
+        cuisine: '',
+        foodtype: '',
+        customizations: [
+          {
+            customizationsType: '',
+            customizations: [
+              {
+                customizationName: '',
+                additionalprice: ''
+              }
+            ]
+          }
+        ],
+        filters: {
+          GlutenFree: '',
+          Spicy: ''
+        }
       });
-      Swal.fire(
-        'Submit!',
-        'Your data is Submitted.',
-        'success'
-      );
-      console.log('Food item created successfully:', response.data);
-      setName('');
-      setPrice('');
-      setFoodtype('');
-      setFoodcategory('');
-      setSubcategorys('');
-      setDescription('');
-      setDiscount('');
-      setFoodimg('');
-      setCustomFields([]);
-      fetchFoodList();
-    } catch (error) {
-      console.error('Error creating food item:', error);
-      Swal.fire(
-        'Error!',
-        'There was an issue creating the food item.',
-        'error'
-      );
-    }
-  };
-
-  useEffect(() => {
-    fetchFoodList();
-  }, []);
-
-  const fetchFoodList = async () => {
-    try {
-      const responses = await axios.get('http://localhost:3001/addfood');
-      setFoodList(responses.data);
-    } catch (error) {
-      console.error('Error fetching food items:', error);
+    } catch (err) {
+      setLoading(false);
+      setError('Error adding product. Please try again.');
     }
   };
 
@@ -120,184 +137,263 @@ const Addproducts = () => {
                 </a>
               </div>
               <div className="row">
-                <div className="col-xl-12 col-lg-12 ">
+                <div className="col-xl-12 col-lg-12">
                   <div className="card shadow mb-4">
-                    <div className="card-header py-3 flex-row align-items-center justify-content-between">
-                      <section className="mt-2 ">
-                        <form
-                          className="contact-form row p-0"
-                          onSubmit={handleSubmit}
-                        >
-                          <div className="form-field col-lg-6">
-                            <input
-                              name="name"
-                              className="input-text js-input"
-                              type="text"
-                              value={name}
-                              onChange={(e) => setName(e.target.value)}
-                              required=""
-                            />
-                            <label className="label" htmlFor="name">
-                              Food Name
-                            </label>
-                          </div>
-                          <div className="form-field col-lg-6 ">
-                            <input
-                              name="price"
-                              className="input-text js-input"
-                              type="number"
-                              value={price}
-                              onChange={(e) => setPrice(e.target.value)}
-                              required=""
-                            />
-                            <label className="label" htmlFor="">
-                              Price
-                            </label>
-                          </div>
-                          <div className="form-field col-lg-6 ">
-                            <input
-                              type="text"
-                              className="input-text js-input"
-                              value={subcategorys}
-                              onChange={(e) => setSubcategorys(e.target.value)}
-                              required=""
-                            />
-                            <label className="label" htmlFor="">
-                              Sub Category
-                            </label>
-                          </div>
-                          <div className="form-field col-lg-6">
-                            <select
-                              className="input-text"
-                              name="foodcategory"
-                              value={foodcategory}
-                              onChange={(e) => setFoodcategory(e.target.value)}
-                            >
-                              <option value=""></option>
-                              {foodList.map((food) => (
-                                <option key={food._id} value={food.foodname}>
-                                  {food.foodname}
-                                </option>
-                              ))}
-                            </select>
-                            <label className="label pb-2" htmlFor="">
-                              Category
-                            </label>
-                          </div>
-                          <div className="form-field col-lg-6">
-                            <input
-                              name="discount"
-                              className="input-text js-input"
-                              type="text"
-                              value={discount}
-                              onChange={(e) => setDiscount(e.target.value)}
-                            />
-                            <label className="label" htmlFor="">
-                              Discount
-                            </label>
-                          </div>
-                          <div className="form-field col-lg-6 ">
-                            <select
-                              className="input-text"
-                              name="foodtype"
-                              value={foodtype}
-                              onChange={(e) => setFoodtype(e.target.value)}
-                            >
-                              <option value=""></option>
-                              <option value="veg">Veg</option>
-                              <option value="nonVeg">Non-Veg</option>
-                            </select>
-                            <label className="label" htmlFor="">
-                              Food Type
-                            </label>
-                          </div>
-                          <div className="form-field col-lg-6">
-                            <input
-                              name="description"
-                              className="input-text js-input"
-                              type="text"
-                              value={description}
-                              onChange={(e) => setDescription(e.target.value)}
-                            />
-                            <label className="label" htmlFor="">
-                              Description
-                            </label>
-                          </div>
-                          <div className="form-field col-lg-6">
-                            <input
-                              name="foodimg"
-                              className="form-control"
-                              type="file"
-                              value={foodimg}
-                              onChange={(e) => setFoodimg(e.target.value)}
-                            />
-                          </div>
-                          <div className="form-field col-lg-6">
-                            <label htmlFor="" className=''>
-                              <a
-                                type="button"
-                                className="custom-product p-0 text-dark"
-                                onClick={() => setShowModal(true)}>
-                                Custom Product + </a>
-                            </label>
-                            <input
-                              name="customproduct"
-                              className="input-text js-input p-0 border-none text-white"
-                              type="text"
-                              value={customproduct}
-                              onChange={(e) => setCustomproduct(e.target.value)}
-                            />
-                          </div>
-                          <div className="form-field col-lg-6">
-                            {/* Modal */}
-                            <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1" role="dialog">
-                              <div className="modal-dialog" role="document">
-                                <div className="modal-content">
-                                  <div className="modal-header">
-                                    <h5 className="modal-title">Add Custom Product</h5>
-                                    <button type="button" className="btn-close" onClick={() => setShowModal(false)} aria-label="Close"></button>
+                    <div className="card-body">
+                      {error && <div className="alert alert-danger">{error}</div>}
+                      {success && <div className="alert alert-success">{success}</div>}
+                      <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                          <label htmlFor="itemname">Item Name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="itemname"
+                            name="itemname"
+                            value={formData.itemname}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="description">Description</label>
+                          <textarea
+                            className="form-control"
+                            id="description"
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="baseprice">Base Price</label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="baseprice"
+                            name="baseprice"
+                            value={formData.baseprice}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="categoryId">Category</label>
+                          <input
+                          type='text'
+                            className="form-control"
+                            id="categoryId"
+                            name="categoryId"
+                            value={formData.categoryId}
+                            onChange={handleChange}
+                          />
+                            {/* <option value="">Select Category</option> */}
+                            {/* <option value="1">Desserts</option>
+                            <option value="2">Main Dishes</option>
+                            <option value="3">Drinks</option> */}
+                          {/* </select> */}
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="subcategoryId">Subcategory</label>
+                          <input
+                          type='text'
+                            className="form-control"
+                            id="subcategoryId"
+                            name="subcategoryId"
+                            value={formData.subcategoryId}
+                            onChange={handleChange}
+                          />
+                            {/* <option value="">Select Subcategory</option> */}
+                            {/* <option value="1">Cakes</option>
+                            <option value="2">Pizzas</option>
+                            <option value="3">Soda</option> */}
+                          {/* </select> */}
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="discount">Discount</label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="discount"
+                            name="discount"
+                            value={formData.discount}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="quantityavailable">Quantity Available</label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="quantityavailable"
+                            name="quantityavailable"
+                            value={formData.quantityavailable}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="image">Image</label>
+                          <input
+                            type="file"
+                            className="form-control"
+                            id="image"
+                            name="image"
+                            value={formData.image}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="cuisine">Cuisine</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="cuisine"
+                            name="cuisine"
+                            value={formData.cuisine}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="foodtype">Food Type</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="foodtype"
+                            name="foodtype"
+                            value={formData.foodtype}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="customizations">Customizations</label>
+                          {formData.customizations.map((customization, index) => (
+                            <div key={index}>
+                              <div className="form-group">
+                                <label htmlFor={`customizationsType-${index}`}>Type</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id={`customizationsType-${index}`}
+                                  name="customizationsType"
+                                  value={customization.customizationsType}
+                                  onChange={(e) => handleCustomizationChange(index, e)}
+                                />
+                              </div>
+                              {customization.customizations.map((option, optionIndex) => (
+                                <div key={optionIndex}>
+                                  <div className="form-group">
+                                    <label htmlFor={`customizationName-${optionIndex}`}>Name</label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id={`customizationName-${optionIndex}`}
+                                      name="customizationName"
+                                      value={option.customizationName}
+                                      onChange={(e) => handleCustomizationChange(index, e)}
+                                    />
                                   </div>
-                                  <div className="modal-body">
-                                    <form onSubmit={handleSubmits}>
-                                      <div className="form-group">
-                                        <label htmlFor="cname">Name</label>
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          id="cname"
-                                          value={cname}
-                                          onChange={(e) => setCname(e.target.value)}
-                                          required
-                                        />
-                                      </div>
-                                      <div className="form-group">
-                                        <label htmlFor="cprice">Price</label>
-                                        <input
-                                          type="number"
-                                          className="form-control"
-                                          id="cprice"
-                                          value={cprice}
-                                          onChange={(e) => setCprice(e.target.value)}
-                                          required
-                                        />
-                                      </div>
-                                      <button type="submit" className="btn btn-primary">Add Custom Product</button>
-                                    </form>
-                                  </div>
-                                  <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                                  <div className="form-group">
+                                    <label htmlFor={`additionalprice-${optionIndex}`}>Additional Price</label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      id={`additionalprice-${optionIndex}`}
+                                      name="additionalprice"
+                                      value={option.additionalprice}
+                                      onChange={(e) => handleCustomizationChange(index, e)}
+                                    />
                                   </div>
                                 </div>
-                              </div>
+                              ))}
+                              <button
+                                type="button"
+                                className="btn btn-danger my-4"
+                                onClick={() => {
+                                  const updatedCustomizations = [...formData.customizations];
+                                  updatedCustomizations.splice(index, 1);
+                                  setFormData({ ...formData, customizations: updatedCustomizations });
+                                }}
+                              >
+                                Remove Customization
+                              </button>
                             </div>
+                          ))}
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={addCustomization}
+                          >
+                            Add Customization
+                          </button>
+                        </div>
+
+
+
+                    {/*Radio  */}
+
+
+                        <div className="form-group">
+                          <label htmlFor="filters">GlutenFree</label>
+                          <div className="form-check">
+                          <input
+                              className="form-check-input"
+                              type="radio"
+                              name="GlutenFree"
+                              id="GlutenFreeYes"
+                              value="Yes"
+                              checked={formData.filters.GlutenFree === 'Yes'}
+                              onChange={(e) => setFormData({ ...formData, filters: { ...formData.filters, GlutenFree: e.target.value } })}
+                            />
+                            <label className="form-check-label" htmlFor="GlutenFreeYes">
+                              Yes
+                            </label>
                           </div>
-                          <div className="form-field col-lg-12 mt-3">
-                            <div className="d-grid gap-2 col-3">
-                              <button className="btn btn-danger" type="submit">Submit</button>
-                            </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="GlutenFree"
+                              id="GlutenFreeNo"
+                              value="No"
+                              checked={formData.filters.GlutenFree === 'No'}
+                              onChange={(e) => setFormData({ ...formData, filters: { ...formData.filters, GlutenFree: e.target.value } })}
+                            />
+                            <label className="form-check-label" htmlFor="GlutenFreeNo">
+                              No
+                            </label>
                           </div>
-                        </form>
-                      </section>
+                          <div className="form-check mt-3">
+                          <label htmlFor="filters">Spicy</label>
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="Spicy"
+                              id="SpicyYes"
+                              value="Yes"
+                              checked={formData.filters.Spicy === 'Yes'}
+                              onChange={(e) => setFormData({ ...formData, filters: { ...formData.filters, Spicy: e.target.value } })}
+                            />
+                            <label className="form-check-label" htmlFor="SpicyYes">
+                              Yes
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="Spicy"
+                              id="SpicyNo"
+                              value="No"
+                              checked={formData.filters.Spicy === 'No'}
+                              onChange={(e) => setFormData({ ...formData, filters: { ...formData.filters, Spicy: e.target.value } })}
+                            />
+                            <label className="form-check-label" htmlFor="SpicyNo">
+                              No
+                            </label>
+                          </div>
+                        </div>
+                        <button type="submit" className="btn btn-primary">
+                          Submit
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>

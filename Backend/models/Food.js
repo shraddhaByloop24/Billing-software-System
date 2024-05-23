@@ -38,11 +38,11 @@ const FoodSchema = new mongoose.Schema({
   customFields: [{
     cname: {
       type: String,
-      required: false
+      required: true
     },
     cprice: {
       type: Number,
-      required: false
+      required: true
     }
   }]
 });
