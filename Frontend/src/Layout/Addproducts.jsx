@@ -154,16 +154,7 @@ const Addproducts = () => {
                             onChange={handleChange}
                           />
                         </div>
-                        <div className="form-group">
-                          <label htmlFor="description">Description</label>
-                          <textarea
-                            className="form-control"
-                            id="description"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                          />
-                        </div>
+                       
                         <div className="form-group">
                           <label htmlFor="baseprice">Base Price</label>
                           <input
@@ -253,14 +244,20 @@ const Addproducts = () => {
                         </div>
                         <div className="form-group">
                           <label htmlFor="foodtype">Food Type</label>
-                          <input
+                          <select
                             type="text"
                             className="form-control"
                             id="foodtype"
                             name="foodtype"
                             value={formData.foodtype}
                             onChange={handleChange}
-                          />
+                          >
+                            <option value="Select your food"></option>
+
+                            <option value="Veg">Veg</option>
+                            <option value="NonVeg">Nonveg</option>
+                            
+                          </select>
                         </div>
                         <div className="form-group">
                           <label htmlFor="customizations">Customizations</label>
@@ -325,12 +322,21 @@ const Addproducts = () => {
                           </button>
                         </div>
 
-
+                        <div className="form-group">
+                          <label htmlFor="description">Description</label>
+                          <textarea
+                            className="form-control"
+                            id="description"
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                          />
+                        </div>
 
                     {/*Radio  */}
 
 
-                        <div className="form-group">
+                        <div className="form-group d-flex ">
                           <label htmlFor="filters">GlutenFree</label>
                           <div className="form-check">
                           <input

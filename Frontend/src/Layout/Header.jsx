@@ -27,7 +27,7 @@ const Header = () => {
                   Add Product
                 </a>
                 <a href="/Productlist" className="list-group-item list-group-item-action ">List Product</a>
-                <a href="/addfood" className="list-group-item list-group-item-action">add Food </a>
+                <a href="/addfood" className="list-group-item list-group-item-action">Add Category </a>
                 <a href="#" className="list-group-item list-group-item-action"></a>
               </div>
             </div>
