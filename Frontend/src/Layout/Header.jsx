@@ -1,35 +1,55 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
-import './style.css'
+import { Link } from 'react-router-dom';
+import './style.css';
 
 const Header = () => {
-
   const [isCollapsedTwo, setIsCollapsedTwo] = useState(false);
 
   const toggleCollapseTwo = () => {
     setIsCollapsedTwo(!isCollapsedTwo);
   };
+
   return (
     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
       <ul className='header-menus text-center  w-100'>
-        <li className={`nav-item ${isCollapsedTwo ? 'active' : ''} menus  pt-4 `}>
+        <li className={`nav-item ${isCollapsedTwo ? 'active' : ''} menus  pt-4  `}>
           <div className="nav-link" onClick={toggleCollapseTwo}>
             <div className='d-flex justify-content-between'>
-              <i className="fa-solid fa-bowl-rice text-white pt-2 iii"></i>
               <span className='text-white sidenav-menu'>Product</span>
               <i className={`fas fa-angle-${isCollapsedTwo ? 'down' : 'right'} ml-auto text-white`}></i>
             </div>
           </div>
+
           <div className={`collapse ${isCollapsedTwo ? 'show' : ''} list-menu pt-5 list-box`} style={{ transition: 'height 2.3s ease !important' }}>
-            <div className="  py-2 collapse-inner rounded border-none">
-              <div className="bg-danger ">
-                <a href="/Addproducts" className="list-group-item list-group-item-action ">
-                  Add Product
-                </a>
-                <a href="/Productlist" className="list-group-item list-group-item-action ">List Product</a>
-                <a href="/addfood" className="list-group-item list-group-item-action">Add Category </a>
-                <a href="#" className="list-group-item list-group-item-action"></a>
+            <div className=" collapse-inner rounded d-flex border-none header-menu py-5">
+
+              <div className="Products-type">
+                <div className='d-flex justify-content-center align-items-center '><img src="/icons/product.png"className='img-fluid img-w px-1' alt="" /> <h5 className=''> Products</h5></div> 
+                <Link to="/Addproducts" className=" list-group-item-action "> Add Product</Link>
+                <Link to="/Productlist" className=" list-group-item-action ">List Product</Link>
+                <Link to="/addfood" className=" list-group-item-action">Add Category </Link>
+                <Link to="#" className=" list-group-item-action">other</Link>
               </div>
+
+            
+              <div className="Billing-type">
+              <div className='d-flex justify-content-center align-items-center'>  <h5 className=''> <img src="/icons/bill.png"className='img-fluid  img-w px-1' alt="" />View Billing</h5></div>
+                <Link to="#" className=" list-group-item-action ">Add Table</Link>
+                <Link to="#" className="list-group-item-action">Booked Table </Link>
+                <Link to="#" className=" list-group-item-action">Remaining Table </Link>
+                <Link to="#" className=" list-group-item-action ">List Table</Link>
+              </div>
+
+
+              <div className="Table-type">
+              <div className='d-flex justify-content-center align-items-center '>  <img src="/icons/table.png"className='img-fluid img-w px-1' alt="" /><h5 className=''>Book Tables</h5></div>
+                <Link to="#" className=" list-group-item-action ">Add Product</Link>
+                <Link to="#" className=" list-group-item-action ">List Product</Link>
+                <Link to="#" className=" list-group-item-action">Add Category </Link>
+                <Link to="#" className=" list-group-item-action">other</Link>
+              </div>
+
             </div>
           </div>
         </li>
@@ -49,8 +69,7 @@ const Header = () => {
           </div>
         </li>
       </ul>
-
-
+   
 
 
 

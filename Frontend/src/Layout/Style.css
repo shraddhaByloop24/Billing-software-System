@@ -1,17 +1,122 @@
-/* header css */
+/* header start ========================================== */
 .header-menus li {
   list-style-type: none;
 }
 
 .list-box {
+  width: 700px;
   position: absolute;
   top: 0;
   z-index: 11111;
 
 }
+.header-menu{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
+.collapse-inner {
+  background-color: white;
+  border-bottom: 2px solid navy;
+}
 
-/* navbar============== */
+.Products-type{
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  align-items: center;
+}
+.list-group-item-action{
+   color: black!important;
+   text-transform: capitalize;
+   padding-top: 4px;
+   font-size: 14px;
+   padding-bottom: 4px;
+   padding-left: 40px;
+}
+.Products-type h5{
+  font-size: 18px;
+  text-align: left !important;
+  padding-right: 20px;
+  color: navy;
+  font-weight: 500;
+}
+
+.Table-type{
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  align-items: center;
+
+}
+.Table-type h5{
+  
+  font-size: 18px;
+  text-align: left !important;
+  /* padding-right: 65px; */
+  color: navy;
+  font-weight: 500;
+}
+/* .Table-type .list-group-item-action{
+  color: black!important;
+  text-transform: capitalize;
+  padding-top: 2px;
+  padding-left: 30px;
+  font-size: 14px;
+  padding-bottom: 4px;
+
+} */
+.Billing-type{
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  /* padding-bottom: 0%; */
+  align-items: center;
+}
+/* .Billing-type .list-group-item-action{
+  color: black!important;
+  text-transform: capitalize;
+  padding-top: 4px;
+  padding-left: 50x;
+  font-size: 14px;
+  padding-bottom: 4px;
+} */
+.Billing-type h5{
+  font-size: 18px;
+  text-align: left !important;
+  padding-right: 20px;
+  color: navy;
+  font-weight: 500;
+}
+.img-w{
+  width: 50px;
+}
+/* Header End============================================== */
+
+/* navbar============================================== */
+.collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.collapse.show {
+  max-height: 500px; /* Adjust as needed */
+}
+
+#maincourse{
+  margin-top: -15px;
+}
+#desserts{
+  margin-top: -15px;
+}
 .navbar-nav {
   background: navy;
   border-right: 10px solid white;
@@ -20,8 +125,7 @@
 
 .navbar {
   background-color: navy !important;
-  /* background-image: linear-gradient(to top  ,navy, rgba(0, 0, 0, 0.793)) !important; */
-  /* background-image: linear-gradient(to top left ,#d63384, #dc3545, #fd2714,#ffc107d2) !important; */
+ 
 }
 
 .Appetizers {
@@ -103,10 +207,7 @@
   animation: slideDown 300ms ease-in-out forwards;
 }
 
-.collapse-inner {
-  background-color: navy;
 
-}
 
 
 
@@ -121,6 +222,10 @@
     transform: translateY(0);
   }
 }
+
+
+/* nav end================================================================== */
+
 
 .editforms {
   display: flex;
