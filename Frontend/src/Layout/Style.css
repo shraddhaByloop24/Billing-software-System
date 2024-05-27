@@ -118,9 +118,9 @@
   margin-top: -15px;
 }
 .navbar-nav {
-  background: navy;
+  /* background: navy; */
   border-right: 10px solid white;
-  /* background-image: linear-gradient(to top left ,#d63384, #dc3545, #fd2714,#ffc107d2) !important; */
+  background-image: linear-gradient(to top left ,#D10363, #dc3545, #fd2714) !important;
 }
 
 .navbar {

@@ -8,7 +8,7 @@ import Addfood from './src/Layout/Addfood';
 import Login from './src/component/Login/Login';
 import Demofood from './src/Layout/Demofood';
 import BurgerPage from './src/Layout/BurgerPage';
-import Newdashboard from './src/Layout/Newdashboard';
+// import Newdashboard from './src/Layout/Newdashboard';
 
 export const routes = [
   {
@@ -51,9 +51,9 @@ export const routes = [
   {
     path : '/burger',
     element:<BurgerPage/>
-  },
-  {
-    path : '/newdashboard',
-    element: <Newdashboard/>
   }
+  // {
+  //   path : '/newdashboard',
+  //   element: <Newdashboard/>
+  // }
 ];

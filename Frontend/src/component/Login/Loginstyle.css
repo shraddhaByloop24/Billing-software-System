@@ -8,7 +8,9 @@
 }
 .login-main{
   clip-path: polygon(68% 0, 39% 53%, 69% 100%, 0% 100%, 0 44%, 0% 0%);
-  background: rgb(175, 38, 63) !important;
+  /* background: rgb(175, 38, 63) !important; */
+  background-image: linear-gradient(to top left , #dc3545, #c01909,#D10363) !important;
+
   position: absolute;
   left: 0;
   width: 50% !important;
@@ -111,7 +113,7 @@ z-index:4444 !important;
   position: absolute;
   top: 28% !important;
   right: 15%;
-  color: rgb(128, 0, 0);
+  color: rgba(128, 0, 0, 0.5);
 }
 .formbg {
   margin-top:-82px ;
@@ -180,7 +182,9 @@ width: 100%;
 
 
 .login-btn {
-background: rgb(175, 38, 63) !important;
+/* background: rgb(175, 38, 63) !important; */
+background-image: linear-gradient(to top left , #dc3545, #c01909,#D10363) !important;
+
 color: white !important;
 } 
 
@@ -439,3 +443,5 @@ position: relative;
 
 }
 }
+
+

@@ -56,7 +56,7 @@ function Login() {
       <div className="container p-3  login-container shadow">
         <div className="row ">
           <div className="col-lg-6 login-img-box">
-            <div className='login-heading'><p>Hello,</p> <h1><b className='unique'>FOODIES !</b> <br /> WE'RE ALWAYS </h1> <p>HERE FOR <b className='unique'>YOU. </b></p>
+            <div className='login-heading'><p>Hello,</p> <h1><b className='uniqu'>FOODIES !</b> <br /> WE'RE ALWAYS </h1> <p>HERE FOR <b className='unique'>YOU. </b></p>
               <i className='login-thought'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis esse repellat exercitationem alias rerum, voluptatem ab! exercitationem Rerum.</i>
             </div>
             {/* <img src="/image/ll.png" className='login-img' alt="" /> */}
@@ -64,7 +64,7 @@ function Login() {
           <div className="col-lg-6  mt-5 login-col ">
 
 
-            <div className="pt-5">
+            <div className="pt-lg-5">
               <div className="box-root flex-flex flex-direction--column">
                 <div className="formbg-outer">
                   <span className="password-toggle" onClick={togglePasswordVisibility}>
@@ -80,7 +80,7 @@ function Login() {
                         </div>
                         <div className="field padding-bottom--24">
                           <label htmlFor="password">Password</label>
-                          <input type={showPassword ? 'text' : 'password'} placeholder='Enter your password' name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                          <input type={showPassword ? 'text' : 'password'} placeholder='Enter your password'  name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className=" field ">
                           <label>Role</label>
@@ -104,9 +104,9 @@ function Login() {
                         </div>
                       </form>
                     </div>
-                    <div className="footer-link pb-3">
+                    <div className="footer-link pb-3 ">
                       <div className="listing flex-flex center-center">
-                        <span className='icon'>
+                        <span className='icon '>
                           <a href=""><i className="fa-brands fa-facebook-f"></i></a>
                         </span>
                         <span className='icon'>
