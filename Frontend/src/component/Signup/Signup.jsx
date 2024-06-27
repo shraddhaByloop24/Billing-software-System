@@ -1,110 +1,117 @@
 import { Link, useNavigate } from 'react-router-dom';
-import './Signup.css'
+import './Signup.css';
 import axios from 'axios';
 import { useState } from 'react';
 
-
 const Signup = () => {
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [mobile, setMobile] = useState();
-  const [role, setRole] = useState();
-  const [address, setAddress] = useState();
+  const [name, setName] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
+  const [address, setAddress] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    axios.post('http://localhost:3001/register', { name, password, email, mobile, role, address })
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
-    navigate('/');
-  }
-
+    e.preventDefault();
+    axios.post('https://a339-2405-201-301d-f0d5-7984-d486-3b2d-c5d5.ngrok-free.app/api/signup', { 
+      username: name, 
+      password, 
+      email, 
+      mobileNo: mobile, 
+      role, 
+      address 
+    })
+      .then(result => {
+        console.log(result);
+        // Assuming success message handling if needed
+        navigate('/');
+      })
+      .catch(err => {
+        console.error(err);
+        if (err.response && err.response.status === 500) {
+          alert('Registration failed: Server error. Please try again later.');
+        } else if (err.response && err.response.data && err.response.data.includes('duplicate key error')) {
+          alert('Username already exists. Please choose a different username.');
+        } else {
+          alert('Registration failed. Please try again.');
+        }
+      });
+  };
+  
   return (
-    <div className='container-fluid  '>
-      <div className="sigup-clippy"></div>
-      <div className="container-fluid  Signup">
-        <div className=' container-fluid backdrop'>
-          <div className="row px-lg-3 py-lg-3 " >
-            <div className="col-lg-7  reg-back d-flex justify-content-center align-items-center">
-              <div className="row ">
-                <div className="col-lg-12 ">
-                  {/* <img src="/image/reg3.png" className='img-fluid reg-img-height ' alt="" /> */}
-                </div>
-              </div>
-            </div>
-
-            <div className="col-lg-5 p-0 form-section registration">
-              <form action="#" onSubmit={handleSubmit} className="form  ">
-                <h1 className='header'>Registration here 👋</h1>
-                <div className="input-box">
-                  <label>Full Name</label>
-                  <input type="text" placeholder="Enter full name"
-                    name='name'
-
-                    onChange={(e) => setName(e.target.value)}
-                    required="" />
-                </div>
-                <div className="input-box">
-                  <label>Email Address</label>
-                  <input type="text" placeholder="Enter email address"
-                    name='email'
-                    onChange={(e) => setEmail(e.target.value)}
-                    required="" />
-                </div>
-                <div className="column">
-                  <div className="input-box">
-                    <label>Password</label>
-                    <input type="password" placeholder="Enter your password"
-                      name='password'
-                      onChange={(e) => setPassword(e.target.value)}
-                      required="" />
-                  </div>
-                  <div className="input-box">
-                    <label>Mobile no</label>
-                    <input type="number" placeholder="Enter phone number"
-                      name='mobile'
-                      onChange={(e) => setMobile(e.target.value)}
-                      required="" />
-                  </div>
-                </div>
-                <div className="input-box">
-                  <label>Role</label>
-                  <select name="role" id="" className='form-control' onChange={(e) => setRole(e.target.value)}>
-                    <option value=" ">Select your role</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Owner">Owner</option>
-                    <option value="Manager">Manager</option>
-                  </select>
-                </div>
-                <div className="input-box">
-                  <label>Address</label>
-                  <input type="text" placeholder="Enter phone Address"
-                    onChange={(e) => setAddress(e.target.value)}
-                    required="" />
-                </div>
-                <div className="agree">
-                  <input type="checkbox" id="termsAndConditions" name="termsAndConditions" required />
-                  <label className='mt-2 px-2 agree-line' >I agree to the terms and conditions</label>
-                </div>
-                <div className='newAcc'>
-                  <span>
-                    New on our platform?  <Link to="/" className='unique'>
-                      if have already account</Link>
-                  </span>
-                </div>
-                <div className=" d-grid gap-2 mt-2">
-                  <button className="btn register-btn  p-2" type="submit">Submit</button>
-                </div>
-              </form>
-            </div>
+    <div className="wrapper shadow" >
+      <div className="container main-inner">
+        <div className="inner">
+          <div className="image-holder">
+            <img src="/image/Untitled-3.png" height={520} alt="" />
           </div>
+          <form onSubmit={handleSubmit}>
+            <h3>Registration Form</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum impedit sapiente ipsam.</p>
+            <div className="form-group">
+              <input type="text" placeholder="Username" name="username" onChange={(e) => setName(e.target.value)} className="form-control" />
+              <input type="text" placeholder="Phone Number" name="mobileNo" onChange={(e) => setMobile(e.target.value)} className="form-control" />
+            </div>
+
+            <div className="form-wrapper">
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="form-control"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <i className="zmdi zmdi-email" />
+            </div>
+
+            <div className="form-wrapper">
+              <select name="role" onChange={(e) => setRole(e.target.value)} className="form-control" defaultValue="">
+                <option value="" disabled>
+                  Role
+                </option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="user">User</option>
+              </select>
+              <i className="zmdi zmdi-caret-down" style={{ fontSize: 17 }} />
+            </div>
+
+            <div className="form-wrapper">
+              <input
+                type="password"
+                placeholder="Password"
+                className="form-control"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <i className="zmdi zmdi-lock" />
+            </div>
+
+            <div className="form-wrapper">
+              <input
+                type="text"
+                placeholder="Address"
+                className="form-control"
+                name="address"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <i className="zmdi zmdi-account" />
+            </div>
+
+            <div className="newAcc text-start">
+              <span>New on our platform? <Link to="/" className="unique">Back</Link></span>
+            </div>
+            
+            <button type="submit">
+              Register
+              <i className="zmdi zmdi-arrow-right" />
+            </button>
+          </form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
-
+export default Signup;

@@ -1,13 +1,13 @@
 import Signup from './src/component/Signup/Signup';
 import Dashboard from './src/component/Dashboard/Dashboard';
 import Addproducts from './src/Layout/Addproducts';
-import Foodlist from './src/Layout/Foodlist';
-import Productlist from './src/Layout/Productlist';
-import Editmenu from './src/Layout/Editmenu';
-import Addfood from './src/Layout/Addfood';
+// import Foodlist from './src/Layout/Foodlist';
+// import Productlist from './src/Layout/Productlist';
+// import Editmenu from './src/Layout/Editmenu';
+// import Addfood from './src/Layout/Addfood';
 import Login from './src/component/Login/Login';
 import Demofood from './src/Layout/Demofood';
-import BurgerPage from './src/Layout/BurgerPage';
+// import BurgerPage from './src/Layout/BurgerPage';
 // import Newdashboard from './src/Layout/Newdashboard';
 
 export const routes = [
@@ -28,30 +28,27 @@ export const routes = [
     path: '/Addproducts',
     element: <Addproducts />,
   },
-  {
-    path: '/Foodlist',
-    element: <Foodlist />,
-  },
-  {
-    path: '/Productlist',
-    element: <Productlist />,
-  },
-  {
-    path: '/edit',
-    element: <Editmenu />,
-  },
-  {
-    path: '/addfood',
-    element: <Addfood />,
-  },
-  {
-    path: '/demo',
-    element: <Demofood/>,
-  },
-  {
-    path : '/burger',
-    element:<BurgerPage/>
-  }
+  // {
+  //   path: '/Foodlist',
+  //   element: <Foodlist />,
+  // },
+  // {
+  //   path: '/Productlist',
+  //   element: <Productlist />,
+  // },
+  // {
+  //   path: '/edit',
+  //   element: <Editmenu />,
+  // },
+  // {
+  //   path: '/addfood',
+  //   element: <Addfood />,
+  // },
+  // {
+  //   path: '/demo',
+  //   element: <Demofood/>,
+  // },
+
   // {
   //   path : '/newdashboard',
   //   element: <Newdashboard/>

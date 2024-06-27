@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import Header from './Header';
+// import Header from './Header';
 import Footer from './Footer';
 import Swal from "sweetalert2";
 
@@ -57,7 +57,7 @@ const Addfood = () => {
         <Navbar />
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
-            <Header />
+            {/* <Header /> */}
             <div className="container">
               <form onSubmit={handleSubmit} className='d-flex justify-content-center'>
                 <input

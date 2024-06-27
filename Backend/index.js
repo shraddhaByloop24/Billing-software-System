@@ -17,7 +17,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/employee", {
 });
 
 // Registration endpoint
-app.post('/register', async (req, res) => {
+app.post('/signup', async (req, res) => {
     try {
         const { name, password, email, mobile, role, address } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
