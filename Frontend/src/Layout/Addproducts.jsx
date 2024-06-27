@@ -1,14 +1,13 @@
 
 // import Swal from 'sweetalert2';
 
-import Header from "./dashboard/Header";
 
 const Addproducts = () => {
 
 
   return (
     <>
-    <Header/>
+   
     <div class="page-wrapper">
     <div class="page-breadcrumb">
     <div class="row">
@@ -34,8 +33,8 @@ const Addproducts = () => {
   <div className="row">
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-cyan text-center">
+      <div className="card card-hover bg-cyan  p-4">
+        <div className="box text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-view-dashboard" />
           </h1>
@@ -44,9 +43,9 @@ const Addproducts = () => {
       </div>
     </div>
     {/* Column */}
-    <div className="col-md-6 col-lg-4 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-success text-center">
+    <div className="col-md-6 col-lg-4 col-xlg-3 ">
+      <div className="card card-hover bg-success  p-4">
+        <div className="box text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-chart-areaspline" />
           </h1>
@@ -56,8 +55,8 @@ const Addproducts = () => {
     </div>
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-warning text-center">
+      <div className="card card-hover bg-warning p-4">
+        <div className="box  text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-collage" />
           </h1>
@@ -67,8 +66,8 @@ const Addproducts = () => {
     </div>
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-danger text-center">
+      <div className="card card-hover bg-danger p-4">
+        <div className="box  text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-border-outside" />
           </h1>
@@ -78,8 +77,8 @@ const Addproducts = () => {
     </div>
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-info text-center">
+      <div className="card card-hover bg-info p-4">
+        <div className="box text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-arrow-all" />
           </h1>
@@ -90,8 +89,8 @@ const Addproducts = () => {
     {/* Column */}
     {/* Column */}
     <div className="col-md-6 col-lg-4 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-danger text-center">
+      <div className="card card-hover bg-danger p-4">
+        <div className="box  text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-receipt" />
           </h1>
@@ -101,8 +100,8 @@ const Addproducts = () => {
     </div>
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-info text-center">
+      <div className="card card-hover bg-info p-4">
+        <div className="box text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-relative-scale" />
           </h1>
@@ -112,8 +111,8 @@ const Addproducts = () => {
     </div>
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-cyan text-center">
+      <div className="card card-hover bg-cyan p-4">
+        <div className="box  text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-pencil" />
           </h1>
@@ -123,8 +122,8 @@ const Addproducts = () => {
     </div>
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-success text-center">
+      <div className="card card-hover bg-success p-4">
+        <div className="box  text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-calendar-check" />
           </h1>
@@ -134,8 +133,8 @@ const Addproducts = () => {
     </div>
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover">
-        <div className="box bg-warning text-center">
+      <div className="card card-hover bg-warning p-4">
+        <div className="box  text-center">
           <h1 className="font-light text-white">
             <i className="mdi mdi-alert" />
           </h1>
