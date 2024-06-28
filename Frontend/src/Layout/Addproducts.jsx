@@ -1,10 +1,69 @@
 
-
+import React, { useState } from 'react';
 import Header from './dashboard/Header';
-// import './dashboard/stylemin.css'
+import './Style.css'
 
 const Addproducts = () => {
+  const [itemname, setItemname] = useState('');
+  const [description, setDescription] = useState('');
+  const [baseprice, setBaseprice] = useState(0);
+  const [category, setCategory] = useState('');
+  const [subcategory, setSubcategory] = useState('');
+  const [discount, setDiscount] = useState(0);
+  const [quantityavailable, setQuantityavailable] = useState(0);
+  const [image, setImage] = useState('');
+  const [cuisine, setCuisine] = useState('');
+  const [foodtype, setFoodtype] = useState('');
+  const [customizations, setCustomizations] = useState([
+    {
+      customizationsType: '',
+      customizations: [
+        {
+          customizationName: '',
+          additionalprice: 0,
+        },
+      ],
+    },
+  ]);
+  const [filters, setFilters] = useState({
+    GlutenFree: '',
+    Spicy: '',
+  });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('https://06f6-2405-201-301d-f0d5-4087-a9fc-2f97-5ac1.ngrok-free.app/api/product', {
+        itemname,
+        description,
+        baseprice,
+        category,
+        subcategory,
+        discount,
+        quantityavailable,
+        image,
+        cuisine,
+        foodtype,
+        customizations,
+        filters,
+      });
+
+      if (response.status === 200) {
+        // Assuming the API returns a success status code
+        console.log("food add sucessfully")
+      } else {
+        // Handle other potential response cases based on API behavior
+        alert('Login failed. Please check your credentials and try again.');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      if (error.response && error.response.status === 401) {
+        alert('Invalid email or password');
+      } else {
+        alert('Login failed. Please try again later.');
+      }
+    }
+  };
 
   return (
     <>
@@ -44,852 +103,240 @@ const Addproducts = () => {
           <div class="page-breadcrumb"></div>
 
           <div className="container-fluid">
-  {/* ============================================================== */}
-  {/* Start Page Content */}
-  {/* ============================================================== */}
+            {/* ============================================================== */}
+            {/* Start Page Content */}
+            {/* ============================================================== */}
 
-  <div className="row">
-    <div className="col-lg-12 col-md-6">
-      <div className="card">
-        <form className="form-horizontal">
-          <div className="card-body">
-            <h4 className="card-title">Personal Info</h4>
-            <div className="form-group row">
-              <label
-                htmlFor="fname"
-                className="col-sm-3 text-end control-label col-form-label"
-              >
-                First Name
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="fname"
-                  placeholder="First Name Here"
-                />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label
-                htmlFor="lname"
-                className="col-sm-3 text-end control-label col-form-label"
-              >
-                Last Name
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="lname"
-                  placeholder="Last Name Here"
-                />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label
-                htmlFor="lname"
-                className="col-sm-3 text-end control-label col-form-label"
-              >
-                Password
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="lname"
-                  placeholder="Password Here"
-                />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label
-                htmlFor="email1"
-                className="col-sm-3 text-end control-label col-form-label"
-              >
-                Company
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="email1"
-                  placeholder="Company Name Here"
-                />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label
-                htmlFor="cono1"
-                className="col-sm-3 text-end control-label col-form-label"
-              >
-                Contact No
-              </label>
-              <div className="col-sm-9">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="cono1"
-                  placeholder="Contact No Here"
-                />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label
-                htmlFor="cono1"
-                className="col-sm-3 text-end control-label col-form-label"
-              >
-                Message
-              </label>
-              <div className="col-sm-9">
-                <textarea className="form-control" defaultValue={""} />
-              </div>
-            </div>
-          </div>
-          <div className="border-top">
-            <div className="card-body">
-              <button type="button" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-          </div>
-        </form>
+            <div className="row">
 
-   
-        
-      </div>
-      {/* <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">Form Elements</h5>
-          <div className="form-group row">
-            <label className="col-md-3 mt-3">Single Select</label>
-            <div className="col-md-9">
-              <select
-                className="select2 form-select shadow-none"
-                style={{ width: "100%", height: 36 }}
-              >
-                <option>Select</option>
-                <optgroup label="Alaskan/Hawaiian Time Zone">
-                  <option value="AK">Alaska</option>
-                  <option value="HI">Hawaii</option>
-                </optgroup>
-                <optgroup label="Pacific Time Zone">
-                  <option value="CA">California</option>
-                  <option value="NV">Nevada</option>
-                  <option value="OR">Oregon</option>
-                  <option value="WA">Washington</option>
-                </optgroup>
-                <optgroup label="Mountain Time Zone">
-                  <option value="AZ">Arizona</option>
-                  <option value="CO">Colorado</option>
-                  <option value="ID">Idaho</option>
-                  <option value="MT">Montana</option>
-                  <option value="NE">Nebraska</option>
-                  <option value="NM">New Mexico</option>
-                  <option value="ND">North Dakota</option>
-                  <option value="UT">Utah</option>
-                  <option value="WY">Wyoming</option>
-                </optgroup>
-                <optgroup label="Central Time Zone">
-                  <option value="AL">Alabama</option>
-                  <option value="AR">Arkansas</option>
-                  <option value="IL">Illinois</option>
-                  <option value="IA">Iowa</option>
-                  <option value="KS">Kansas</option>
-                  <option value="KY">Kentucky</option>
-                  <option value="LA">Louisiana</option>
-                  <option value="MN">Minnesota</option>
-                  <option value="MS">Mississippi</option>
-                  <option value="MO">Missouri</option>
-                  <option value="OK">Oklahoma</option>
-                  <option value="SD">South Dakota</option>
-                  <option value="TX">Texas</option>
-                  <option value="TN">Tennessee</option>
-                  <option value="WI">Wisconsin</option>
-                </optgroup>
-                <optgroup label="Eastern Time Zone">
-                  <option value="CT">Connecticut</option>
-                  <option value="DE">Delaware</option>
-                  <option value="FL">Florida</option>
-                  <option value="GA">Georgia</option>
-                  <option value="IN">Indiana</option>
-                  <option value="ME">Maine</option>
-                  <option value="MD">Maryland</option>
-                  <option value="MA">Massachusetts</option>
-                  <option value="MI">Michigan</option>
-                  <option value="NH">New Hampshire</option>
-                  <option value="NJ">New Jersey</option>
-                  <option value="NY">New York</option>
-                  <option value="NC">North Carolina</option>
-                  <option value="OH">Ohio</option>
-                  <option value="PA">Pennsylvania</option>
-                  <option value="RI">Rhode Island</option>
-                  <option value="SC">South Carolina</option>
-                  <option value="VT">Vermont</option>
-                  <option value="VA">Virginia</option>
-                  <option value="WV">West Virginia</option>
-                </optgroup>
-              </select>
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-md-3 mt-3">Multiple Select</label>
-            <div className="col-md-9">
-              <select
-                className="select2 form-select shadow-none mt-3"
-                multiple="multiple"
-                style={{ height: 36, width: "100%" }}
-              >
-                <optgroup label="Alaskan/Hawaiian Time Zone">
-                  <option value="AK">Alaska</option>
-                  <option value="HI">Hawaii</option>
-                </optgroup>
-                <optgroup label="Pacific Time Zone">
-                  <option value="CA">California</option>
-                  <option value="NV">Nevada</option>
-                  <option value="OR">Oregon</option>
-                  <option value="WA">Washington</option>
-                </optgroup>
-                <optgroup label="Mountain Time Zone">
-                  <option value="AZ">Arizona</option>
-                  <option value="CO">Colorado</option>
-                  <option value="ID">Idaho</option>
-                  <option value="MT">Montana</option>
-                  <option value="NE">Nebraska</option>
-                  <option value="NM" selected="">
-                    New Mexico
-                  </option>
-                  <option value="ND">North Dakota</option>
-                  <option value="UT">Utah</option>
-                  <option value="WY">Wyoming</option>
-                </optgroup>
-                <optgroup label="Central Time Zone">
-                  <option value="AL">Alabama</option>
-                  <option value="AR">Arkansas</option>
-                  <option value="IL">Illinois</option>
-                  <option value="IA">Iowa</option>
-                  <option value="KS">Kansas</option>
-                  <option value="KY">Kentucky</option>
-                  <option value="LA">Louisiana</option>
-                  <option value="MN">Minnesota</option>
-                  <option value="MS">Mississippi</option>
-                  <option value="MO">Missouri</option>
-                  <option value="OK">Oklahoma</option>
-                  <option value="SD" selected="">
-                    South Dakota
-                  </option>
-                  <option value="TX">Texas</option>
-                  <option value="TN">Tennessee</option>
-                  <option value="WI">Wisconsin</option>
-                </optgroup>
-                <optgroup label="Eastern Time Zone">
-                  <option value="CT">Connecticut</option>
-                  <option value="DE">Delaware</option>
-                  <option value="FL">Florida</option>
-                  <option value="GA">Georgia</option>
-                  <option value="IN">Indiana</option>
-                  <option value="ME">Maine</option>
-                  <option value="MD">Maryland</option>
-                  <option value="MA">Massachusetts</option>
-                  <option value="MI">Michigan</option>
-                  <option value="NH">New Hampshire</option>
-                  <option value="NJ">New Jersey</option>
-                  <option value="NY">New York</option>
-                  <option value="NC">North Carolina</option>
-                  <option value="OH">Ohio</option>
-                  <option value="PA">Pennsylvania</option>
-                  <option value="RI">Rhode Island</option>
-                  <option value="SC">South Carolina</option>
-                  <option value="VT">Vermont</option>
-                  <option value="VA">Virginia</option>
-                  <option value="WV">West Virginia</option>
-                </optgroup>
-              </select>
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-md-3">Radio Buttons</label>
-            <div className="col-md-9">
-              <div className="form-check">
-                <input
-                  type="radio"
-                  className="form-check-input"
-                  id="customControlValidation1"
-                  name="radio-stacked"
-                  required=""
-                />
-                <label
-                  className="form-check-label mb-0"
-                  htmlFor="customControlValidation1"
-                >
-                  First One
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  type="radio"
-                  className="form-check-input"
-                  id="customControlValidation2"
-                  name="radio-stacked"
-                  required=""
-                />
-                <label
-                  className="form-check-label mb-0"
-                  htmlFor="customControlValidation2"
-                >
-                  Second One
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  type="radio"
-                  className="form-check-input"
-                  id="customControlValidation3"
-                  name="radio-stacked"
-                  required=""
-                />
-                <label
-                  className="form-check-label mb-0"
-                  htmlFor="customControlValidation3"
-                >
-                  Third One
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-md-3">Checkboxes</label>
-            <div className="col-md-9">
-              <div className="form-check mr-sm-2">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="customControlAutosizing1"
-                />
-                <label
-                  className="form-check-label mb-0"
-                  htmlFor="customControlAutosizing1"
-                >
-                  First One
-                </label>
-              </div>
-              <div className="form-check mr-sm-2">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="customControlAutosizing2"
-                />
-                <label
-                  className="form-check-label mb-0"
-                  htmlFor="customControlAutosizing2"
-                >
-                  Second One
-                </label>
-              </div>
-              <div className="form-check mr-sm-2">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="customControlAutosizing3"
-                />
-                <label
-                  className="form-check-label mb-0"
-                  htmlFor="customControlAutosizing3"
-                >
-                  Third One
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-md-3">File Upload</label>
-            <div className="col-md-9">
-              <div className="custom-file">
-                <input
-                  type="file"
-                  className="custom-file-input"
-                  id="validatedCustomFile"
-                  required=""
-                />
-                <label
-                  className="custom-file-label"
-                  htmlFor="validatedCustomFile"
-                >
-                  Choose file...
-                </label>
-                <div className="invalid-feedback">
-                  Example invalid custom file feedback
+              <div className="card">
+
+                <div className="row p-3">
+                  {/* <h4 class="card-title">Personal Info</h4> */}
+                  <div className="col-lg-8">
+                    <form onSubmit={handleSubmit}>
+                      <h2>Create New Product</h2>
+                      <label>
+                        Item Name:
+                        <input className="form-control"
+                          type="text"
+                          value={itemname}
+                          onChange={(event) => setItemname(event.target.value)}
+                          required
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Description:
+                        <textarea
+                          value={description}
+                          onChange={(event) => setDescription(event.target.value)}
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Base Price:
+                        <input className="form-control"
+                          type="number"
+                          value={baseprice}
+                          onChange={(event) => setBaseprice(event.target.value)}
+                          required
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Category:
+                        <input className="form-control"
+                          type="text"
+                          value={category}
+                          onChange={(event) => setCategory(event.target.value)}
+                          required
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Subcategory:
+                        <input className="form-control"
+                          type="text"
+                          value={subcategory}
+                          onChange={(event) => setSubcategory(event.target.value)}
+                          required
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Discount:
+                        <input className="form-control"
+                          type="number"
+                          value={discount}
+                          onChange={(event) => setDiscount(event.target.value)}
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Quantity Available:
+                        <input className="form-control"
+                          type="number"
+                          value={quantityavailable}
+                          onChange={(event) => setQuantityavailable(event.target.value)}
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Image:
+                        <input className="form-control"
+                          type="text"
+                          value={image}
+                          onChange={(event) => setImage(event.target.value)}
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Cuisine:
+                        <input className="form-control"
+                          type="text"
+                          value={cuisine}
+                          onChange={(event) => setCuisine(event.target.value)}
+                        />
+                      </label>
+                      <br />
+                      <label>
+                        Food Type:
+                        <input className="form-control"
+                          type="text"
+                          value={foodtype}
+                          onChange={(event) => setFoodtype(event.target.value)}
+                        />
+                      </label>
+                      <br />
+                      <h3>Customizations</h3>
+                      {customizations.map((customization, index) => (
+                        <div key={index}>
+                          <label>
+                            Customization Type:
+                            <input className="form-control"
+                              type="text"
+                              value={customization.customizationsType}
+                              onChange={(event) =>
+                                setCustomizations(
+                                  customizations.map((c, i) =>
+                                    i === index
+                                      ? { ...c, customizationsType: event.target.value }
+                                      : c
+                                  )
+                                )
+                              }
+                            />
+                          </label>
+                          <br />
+                          {customization.customizations.map((c, i) => (
+                            <div key={i}>
+                              <label>
+                                Customization Name:
+                                <input className="form-control"
+                                  type="text"
+                                  value={c.customizationName}
+                                  onChange={(event) =>
+                                    setCustomizations(
+                                      customizations.map((custom, j) =>
+                                        j === index
+                                          ? {
+                                            ...custom,
+                                            customizations: custom.customizations.map(
+                                              (cc, k) =>
+                                                k === i
+                                                  ? { ...cc, customizationName: event.target.value }
+                                                  : cc
+                                            ),
+                                          }
+                                          : custom
+                                      )
+                                    )
+                                  }
+                                />
+                              </label>
+                              <br />
+                              <label>
+                                Additional Price:
+                                <input className="form-control"
+                                  type="number"
+                                  value={c.additionalprice}
+                                  onChange={(event) =>
+                                    setCustomizations(
+                                      customizations.map((custom, j) =>
+                                        j === index
+                                          ? {
+                                            ...custom,
+                                            customizations: custom.customizations.map(
+                                              (cc, k) =>
+                                                k === i
+                                                  ? { ...cc, additionalprice: event.target.value }
+                                                  : cc
+                                            ),
+                                          }
+                                          : custom
+                                      )
+                                    )
+                                  }
+                                />
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                      <br />
+                      <h3>Filters</h3>
+                      <label>
+                        Gluten Free:
+                        <select
+                          value={filters.GlutenFree}
+                          onChange={(event) =>
+                            setFilters({ ...filters, GlutenFree: event.target.value })
+                          }
+                        >
+                          <option value="">Select</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                      </label>
+                      <br />
+                      <label>
+                        Spicy:
+                        <select
+                          value={filters.Spicy}
+                          onChange={(event) =>
+                            setFilters({ ...filters, Spicy: event.target.value })
+                          }
+                        >
+                          <option value="">Select</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                      </label>
+                      <br />
+                      <button type="submit">Create Product</button>
+                    </form>
+                  </div>
+                  <div className="col-lg-4 bg-info p-0">
+                    <img src="image/Addfood.jpg" alt="" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-md-3" htmlFor="disabledTextInput">
-              Disabled input
-            </label>
-            <div className="col-md-9">
-              <input
-                type="text"
-                id="disabledTextInput"
-                className="form-control"
-                placeholder="Disabled input"
-                disabled=""
-              />
-            </div>
-          </div>
-        </div>
-        <div className="border-top">
-          <div className="card-body">
-            <button type="button" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="card">
-        <div className="card-body">
-          <h4 className="card-title">Forms Control</h4>
-          <div className="form-group">
-            <label htmlFor="hue-demo">Hue</label>
-            <input
-              type="text"
-              id="hue-demo"
-              className="form-control demo"
-              data-control="hue"
-              defaultValue="#ff6161"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="position-bottom-left">Bottom left (default)</label>
-            <input
-              type="text"
-              id="position-bottom-left"
-              className="form-control demo"
-              data-position="bottom left"
-              defaultValue="#0088cc"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="position-top-right">Top right</label>
-            <input
-              type="text"
-              id="position-top-right"
-              className="form-control demo"
-              data-position="top right"
-              defaultValue="#0088cc"
-            />
-          </div>
-          <label>Datepicker</label>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control mydatepicker"
-              placeholder="mm/dd/yyyy"
-            />
-            <div className="input-group-append">
-              <span className="input-group-text h-100">
-                <i className="mdi mdi-calendar" />
-              </span>
-            </div>
-          </div>
-          <label className="mt-3">Autoclose Datepicker</label>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              id="datepicker-autoclose"
-              placeholder="mm/dd/yyyy"
-            />
-            <div className="input-group-append">
-              <span className="input-group-text h-100">
-                <i className="mdi mdi-calendar" />
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="border-top">
-          <div className="card-body">
-            <button type="submit" className="btn btn-success text-white">
-              Save
-            </button>
-            <button type="submit" className="btn btn-primary">
-              Reset
-            </button>
-            <button type="submit" className="btn btn-info">
-              Edit
-            </button>
-            <button type="submit" className="btn btn-danger text-white">
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div> */}
-    </div>
-    {/* <div className="col-md-6">
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title mb-0">Form Elements</h5>
-          <div className="form-group mt-3">
-            <label>
-              Date Mask
-              <small className="text-muted">dd/mm/yyyy</small>
-            </label>
-            <input
-              type="text"
-              className="form-control date-inputmask"
-              id="date-mask"
-              placeholder="Enter Date"
-            />
-          </div>
-          <div className="form-group">
-            <label>
-              Phone
-              <small className="text-muted">(999) 999-9999</small>
-            </label>
-            <input
-              type="text"
-              className="form-control phone-inputmask"
-              id="phone-mask"
-              placeholder="Enter Phone Number"
-            />
-          </div>
-          <div className="form-group">
-            <label>
-              International Number
-              <small className="text-muted">+19 999 999 999</small>
-            </label>
-            <input
-              type="text"
-              className="form-control international-inputmask"
-              id="international-mask"
-              placeholder="International Phone Number"
-            />
-          </div>
-          <div className="form-group">
-            <label>
-              Phone / xEx
-              <small className="text-muted">(999) 999-9999 / x999999</small>
-            </label>
-            <input
-              type="text"
-              className="form-control xphone-inputmask"
-              id="xphone-mask"
-              placeholder="Enter Phone Number"
-            />
-          </div>
-          <div className="form-group">
-            <label>
-              Purchase Order
-              <small className="text-muted">aaaa 9999-****</small>
-            </label>
-            <input
-              type="text"
-              className="form-control purchase-inputmask"
-              id="purchase-mask"
-              placeholder="Enter Purchase Order"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">Form Elements</h5>
-          <div className="row mb-3 align-items-center">
-            <div className="col-lg-4 col-md-12 text-end">
-              <span>Tooltip Input</span>
-            </div>
-            <div className="col-lg-8 col-md-12">
-              <input
-                type="text"
-                data-toggle="tooltip"
-                title="A Tooltip for the input !"
-                className="form-control"
-                id="validationDefault05"
-                placeholder="Hover For tooltip"
-                required=""
-              />
-            </div>
-          </div>
-          <div className="row mb-3 align-items-center">
-            <div className="col-lg-4 col-md-12 text-end">
-              <span>Type Ahead Input</span>
-            </div>
-            <div className="col-lg-8 col-md-12">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Type here for auto complete.."
-                required=""
-              />
-            </div>
-          </div>
-          <div className="row mb-3 align-items-center">
-            <div className="col-lg-4 col-md-12 text-end">
-              <span>Prepended Input</span>
-            </div>
-            <div className="col-lg-8 col-md-12">
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">
-                    #
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Prepend"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="row mb-3 align-items-center">
-            <div className="col-lg-4 col-md-12 text-end">
-              <span>Appended Input</span>
-            </div>
-            <div className="col-lg-8 col-md-12">
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={5.0}
-                  aria-label="Recipient 's username"
-                  aria-describedby="basic-addon2"
-                />
-                <div className="input-group-append">
-                  <span className="input-group-text" id="basic-addon2">
-                    $
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row mb-3 align-items-center">
-            <div className="col-lg-4 col-md-12 text-end">
-              <span className="text-success">Input with Sccess</span>
-            </div>
-            <div className="col-lg-8 col-md-12">
-              <input
-                type="text"
-                className="form-control is-valid"
-                id="validationServer01"
-              />
-              <div className="valid-feedback">Woohoo!</div>
-            </div>
-          </div>
-          <div className="row mb-3 align-items-center">
-            <div className="col-lg-4 col-md-12 text-end">
-              <span className="text-danger">Input with Error</span>
-            </div>
-            <div className="col-lg-8 col-md-12">
-              <input
-                type="text"
-                className="form-control is-invalid"
-                id="validationServer01"
-              />
-              <div className="invalid-feedback">Please correct the error</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-body">
-          <div className="row mb-3">
-            <div className="col-lg-12">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-12"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-11">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-11"
-              />
-            </div>
-            <div className="col-lg-1 ps-0">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-1"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-10">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-10"
-              />
-            </div>
-            <div className="col-lg-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-2"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-9">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-9"
-              />
-            </div>
-            <div className="col-lg-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-3"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-8">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-8"
-              />
-            </div>
-            <div className="col-lg-4">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-4"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-7">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-7"
-              />
-            </div>
-            <div className="col-lg-5">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-5"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-6">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-6"
-              />
-            </div>
-            <div className="col-lg-6">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-6"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-5">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-5"
-              />
-            </div>
-            <div className="col-lg-7">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-7"
-              />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-lg-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-2"
-              />
-            </div>
-            <div className="col-lg-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-3"
-              />
-            </div>
-            <div className="col-lg-4">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-4"
-              />
-            </div>
-            <div className="col-lg-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-2"
-              />
-            </div>
-            <div className="col-lg-1 ps-0">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="col-md-1"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> */}
-  </div>
-  {/* editor */}
-  <div className="row">
-    <div className="col-12">
-      <div className="card">
-        <div className="card-body">
-          <h4 className="card-title">Quill Editor</h4>
-          {/* Create the editor container */}
-          <div id="editor" style={{ height: 300 }}>
-            <p>Hello World!</p>
-            <p>
-              Some initial <strong>bold</strong> text
-            </p>
-            <p>
-              <br />
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  {/* ============================================================== */}
-  {/* End PAge Content */}
-  {/* ============================================================== */}
-  {/* ============================================================== */}
-  {/* Right sidebar */}
-  {/* ============================================================== */}
-  {/* .right-sidebar */}
-  {/* ============================================================== */}
-  {/* End Right sidebar */}
-  {/* ============================================================== */}
-</div>
 
-      
+            {/* ============================================================== */}
+            {/* End PAge Content */}
+            {/* ============================================================== */}
+            {/* ============================================================== */}
+            {/* Right sidebar */}
+            {/* ============================================================== */}
+            {/* .right-sidebar */}
+            {/* ============================================================== */}
+            {/* End Right sidebar */}
+            {/* ============================================================== */}
+          </div>
+
+
           <footer className="footer text-center">
             All Rights Reserved by Matrix-admin. Designed and Developed by
             <a href="https://www.wrappixel.com">WrapPixel</a>.
@@ -897,7 +344,7 @@ const Addproducts = () => {
 
         </div>
 
-      </div>
+      </div >
 
 
     </>
