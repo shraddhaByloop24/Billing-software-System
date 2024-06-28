@@ -1,323 +1,721 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Navbar from './Navbar';
-import Header from './Header';
-import Footer from './Footer';
-import html2canvas from 'html2canvas';
-import Swal from "sweetalert2";
+import React from 'react'
+import Header from './dashboard/Header'
 
 const Productlist = () => {
-  const [foods, setFoods] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [editMode, setEditMode] = useState(false);
-  const [editedFood, setEditedFood] = useState({
-    name: '',
-    price: '',
-    description: '',
-    foodtype: '',
-    foodcategory: '',
-    subcategorys: '',
-    discount: '',
-    foodimg: ''
-  });
-  const [foodList, setFoodList] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    fetchFoods();
-    fetchFoodList();
-  }, []);
-
-  const fetchFoods = async () => {
-    try {
-      const response = await axios.get('http://localhost:3001/food');
-      setFoods(response.data);
-    } catch (error) {
-      console.error('Error fetching food items:', error);
-    }
-  };
-
-  const fetchFoodList = async () => {
-    try {
-      const responses = await axios.get('http://localhost:3001/addfood');
-      setFoodList(responses.data);
-    } catch (error) {
-      console.error('Error fetching food items:', error);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    // Show a SweetAlert confirmation dialog
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t to Delete the data!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          
-          await axios.delete(`http://localhost:3001/food/${id}`);
-          console.log('Food item deleted successfully:', id);
-            Swal.fire(
-            'Deleted!',
-            'Your data has been deleted.',
-            'success'
-          );
-          // Refresh the food list
-          fetchFoods();
-        } catch (error) {
-          console.error('Error deleting food item:', error);
-          // Show an error SweetAlert if deletion fails
-          Swal.fire(
-            'Error!',
-            'Failed to delete the food item.',
-            'error'
-          );
-        }
-      }
-    });
-  };
-  
-  const handleEdit = (food) => {
-    setEditMode(true);
-    setEditedFood(food);
-    setShowModal(true);
-  };
-
-  const handleUpdate = async () => {
-    try {
-      await axios.put(`http://localhost:3001/food/${editedFood._id}`, editedFood);
-      console.log('Food item updated successfully:', editedFood);
-      fetchFoods();
-      setEditMode(false);
-      setEditedFood({
-        name: '',
-        price: '',
-        description: '',
-        foodtype: '',
-        foodcategory: '',
-        subcategorys: '',
-        discount: '',
-        foodimg: ''
-      });
-      setShowModal(false);
-    } catch (error) {
-      console.error('Error updating food item:', error);
-    }
-  };
-
-  const filteredFoods = foods.filter(food =>
-    food.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    food.foodtype.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    food.price.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
-    food.foodcategory.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
-    <div id="wrapper" className="sub-category">
-      <Navbar />
-      <div id="content-wrapper" className="d-flex flex-column">
-        <div id="content">
-          <Header />
-          <div className="container-fluid">
-            <div className="d-sm-flex align-items-center justify-content-between mb-4 seach-fied">
-              <div className='set-searchbar d-flex justify-content-between'>
-                <i className="fa-solid fa-magnifying-glass"></i>
-                <input
-                  type="text"
-                  className="p-3 border form-control w-50"
-                  placeholder="Search Food..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button className='btn bg-gradient-danger'><a href="/Addproducts" className='text-white text-decoration-none'>Add Product</a></button>
+    <>
+     <div
+        id="main-wrapper"
+        data-layout="vertical"
+        data-navbarbg="skin5"
+        data-sidebartype="full"
+        data-sidebar-position="absolute"
+        data-header-position="absolute"
+        data-boxed-layout="full"
+      >
+        <Header />
+
+
+        <div class="page-wrapper">
+          <div class="page-breadcrumb">
+            <div class="row">
+              <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Tables</h4>
+                <div class="ms-auto text-end">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Library
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
               </div>
             </div>
+          </div>
+          <div class="page-breadcrumb"></div>
+          <div className="container-fluid">
+            {/* ============================================================== */}
+            {/* Start Page Content */}
+            {/* ============================================================== */}
             <div className="row">
-              <div className="col-xl-12 col-lg-12">
-                <div className="card shadow mb-4">
-                  <div className="card-header py-3 flex-row align-items-center justify-content-between">
-                    <h6 className="m-0 font-weight-bold text-primary">Food Items</h6>
-                  </div>
+              <div className="col-12">
+                <div className="card">
                   <div className="card-body">
-                    <table className="table shadow">
-                      <thead>
-                        <tr className='table-secondary'>
-                          <th className='px-2'> S no </th>
-                          <th className='px-2'>Name</th>
-                          <th className='px-2'>Price</th>
-                          <th className='px-2'>Description</th>
-                          <th className='px-2'>Type</th>
-                          <th className='px-2'>Category</th>
-                          <th className='px-2'>SubCategory</th>
-                          <th className='px-2'>Discount</th>
-                          <th className='px-2'>Image</th>
-                          <th className='px-2'>Actions</th>
+                    <h5 className="card-title mb-0">Static Table</h5>
+                  </div>
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title mb-0">
+                      Static Table With Checkboxes
+                    </h5>
+                  </div>
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead className="thead-light">
+                        <tr>
+                          <th>
+                            <label className="customcheckbox mb-3">
+                              <input type="checkbox" id="mainCheckbox" />
+                              <span className="checkmark" />
+                            </label>
+                          </th>
+                          <th scope="col">Rendering engine</th>
+                          <th scope="col">Browser</th>
+                          <th scope="col">Platform(s)</th>
+                          <th scope="col">Engine version</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        {filteredFoods.map((food, index) => (
-                          <tr key={food._id}>
-                            <td>{index + 1}</td>
-                            <td className='p-0 px-2 pt-2'>{editMode && editedFood._id === food._id ? <input type="text" className='field' value={editedFood.name} onChange={(e) => setEditedFood({ ...editedFood, name: e.target.value })} /> : food.name}</td>
-                            <td className='p-0  pt-2'>{editMode && editedFood._id === food._id ? <input type="number" className='field' value={editedFood.price} onChange={(e) => setEditedFood({ ...editedFood, price: e.target.value })} /> : food.price}</td>
-                            <td className='p-0  pt-2'>{editMode && editedFood._id === food._id ? <input type="text" className='field' value={editedFood.description} onChange={(e) => setEditedFood({ ...editedFood, description: e.target.value })} /> : food.description}</td>
-                            <td className='p-0  pt-2'>{editMode && editedFood._id === food._id ? <select className="field mt-2" value={editedFood.foodtype} onChange={(e) => setEditedFood({ ...editedFood, foodtype: e.target.value })} ><option value=" "> </option><option value="veg">Veg</option><option value="nonVeg">Non-Veg</option></select> : food.foodtype}</td>
-                            <td className='p-0  pt-2'> 
-                              {editMode && editedFood._id === food._id ? (
-                                <select className="input-text" value={editedFood.foodcategory} onChange={(e) => setEditedFood({ ...editedFood, foodcategory: e.target.value })}>
-                                  <option value="">Select Food Category</option>
-                                  {foodList.map(food => (
-                                    <option key={food._id} value={food.foodname}>{food.foodname}</option>
-                                  ))}
-                                </select>
-                              ) : (
-                                food.foodcategory 
-                              )}
-                            </td>
-                            <td className='p-0 pt-2'>{editMode && editedFood._id === food._id ? <input type="text" className='field' value={editedFood.subcategorys} onChange={(e) => setEditedFood({ ...editedFood, subcategorys: e.target.value })} /> : food.subcategorys}</td>
-                            <td className='p-0 px-2 pt-2'>{editMode && editedFood._id === food._id ? <input type="text" className='field' value={editedFood.discount} onChange={(e) => setEditedFood({ ...editedFood, discount: e.target.value })} /> : food.discount}</td>
-                            <td className='p-0 pt-2'>{editMode && editedFood._id === food._id ? <input type="text" className='field' value={editedFood.foodimg} onChange={(e) => setEditedFood({ ...editedFood, foodimg: e.target.value })} /> : <img src={food.foodimg} alt="Food" className="food-image" />}</td>
-                            <td> {editMode && editedFood._id === food._id ? (
-                              <button onClick={handleUpdate} type="button" className="btn btn-success btn-sm mx-2"><i className="fa-solid fa-pen-to-square"></i></button>
-                            ) : (
-                              <>
-                                <button className="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#editModal"><i className="fa-solid fa-pen-fancy"></i></button>
-                                <button onClick={() => handleDelete(food._id)} className="btn bg-gradient-danger text-white btn-sm"><i className="fa-solid fa-trash"></i></button>
-                              </>
-                            )}
-                            </td>
-                          </tr>
-                        ))}
+                      <tbody className="customtable">
+                        <tr>
+                          <th>
+                            <label className="customcheckbox">
+                              <input type="checkbox" className="listCheckbox" />
+                              <span className="checkmark" />
+                            </label>
+                          </th>
+                          <td>Trident</td>
+                          <td>Internet Explorer 4.0</td>
+                          <td>Win 95+</td>
+                          <td>4</td>
+                        </tr>
+                        <tr>
+                          <th>
+                            <label className="customcheckbox">
+                              <input type="checkbox" className="listCheckbox" />
+                              <span className="checkmark" />
+                            </label>
+                          </th>
+                          <td>Trident</td>
+                          <td>Internet Explorer 5.0</td>
+                          <td>Win 95+</td>
+                          <td>5</td>
+                        </tr>
+                        <tr>
+                          <th>
+                            <label className="customcheckbox">
+                              <input type="checkbox" className="listCheckbox" />
+                              <span className="checkmark" />
+                            </label>
+                          </th>
+                          <td>Trident</td>
+                          <td>Internet Explorer 4.0</td>
+                          <td>Win 95+</td>
+                          <td>4</td>
+                        </tr>
+                        <tr>
+                          <th>
+                            <label className="customcheckbox">
+                              <input type="checkbox" className="listCheckbox" />
+                              <span className="checkmark" />
+                            </label>
+                          </th>
+                          <td>Trident</td>
+                          <td>Internet Explorer 5.0</td>
+                          <td>Win 95+</td>
+                          <td>5</td>
+                        </tr>
+                        <tr>
+                          <th>
+                            <label className="customcheckbox">
+                              <input type="checkbox" className="listCheckbox" />
+                              <span className="checkmark" />
+                            </label>
+                          </th>
+                          <td>Trident</td>
+                          <td>Internet Explorer 5.5</td>
+                          <td>Win 95+</td>
+                          <td>5.5</td>
+                        </tr>
+                        <tr>
+                          <th>
+                            <label className="customcheckbox">
+                              <input type="checkbox" className="listCheckbox" />
+                              <span className="checkmark" />
+                            </label>
+                          </th>
+                          <td>Trident</td>
+                          <td>Internet Explorer 6</td>
+                          <td>Win 98+</td>
+                          <td>6</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title">Collspan Table Example</h5>
+                  </div>
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td colSpan={2}>Larry the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title">Basic Datatable</h5>
+                    <div className="table-responsive">
+                      <table
+                        id="zero_config"
+                        className="table table-striped table-bordered"
+                      >
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61</td>
+                            <td>2011/04/25</td>
+                            <td>$320,800</td>
+                          </tr>
+                          <tr>
+                            <td>Garrett Winters</td>
+                            <td>Accountant</td>
+                            <td>Tokyo</td>
+                            <td>63</td>
+                            <td>2011/07/25</td>
+                            <td>$170,750</td>
+                          </tr>
+                          <tr>
+                            <td>Ashton Cox</td>
+                            <td>Junior Technical Author</td>
+                            <td>San Francisco</td>
+                            <td>66</td>
+                            <td>2009/01/12</td>
+                            <td>$86,000</td>
+                          </tr>
+                          <tr>
+                            <td>Cedric Kelly</td>
+                            <td>Senior Javascript Developer</td>
+                            <td>Edinburgh</td>
+                            <td>22</td>
+                            <td>2012/03/29</td>
+                            <td>$433,060</td>
+                          </tr>
+                          <tr>
+                            <td>Airi Satou</td>
+                            <td>Accountant</td>
+                            <td>Tokyo</td>
+                            <td>33</td>
+                            <td>2008/11/28</td>
+                            <td>$162,700</td>
+                          </tr>
+                          <tr>
+                            <td>Brielle Williamson</td>
+                            <td>Integration Specialist</td>
+                            <td>New York</td>
+                            <td>61</td>
+                            <td>2012/12/02</td>
+                            <td>$372,000</td>
+                          </tr>
+                          <tr>
+                            <td>Herrod Chandler</td>
+                            <td>Sales Assistant</td>
+                            <td>San Francisco</td>
+                            <td>59</td>
+                            <td>2012/08/06</td>
+                            <td>$137,500</td>
+                          </tr>
+                          <tr>
+                            <td>Rhona Davidson</td>
+                            <td>Integration Specialist</td>
+                            <td>Tokyo</td>
+                            <td>55</td>
+                            <td>2010/10/14</td>
+                            <td>$327,900</td>
+                          </tr>
+                          <tr>
+                            <td>Colleen Hurst</td>
+                            <td>Javascript Developer</td>
+                            <td>San Francisco</td>
+                            <td>39</td>
+                            <td>2009/09/15</td>
+                            <td>$205,500</td>
+                          </tr>
+                          <tr>
+                            <td>Sonya Frost</td>
+                            <td>Software Engineer</td>
+                            <td>Edinburgh</td>
+                            <td>23</td>
+                            <td>2008/12/13</td>
+                            <td>$103,600</td>
+                          </tr>
+                          <tr>
+                            <td>Jena Gaines</td>
+                            <td>Office Manager</td>
+                            <td>London</td>
+                            <td>30</td>
+                            <td>2008/12/19</td>
+                            <td>$90,560</td>
+                          </tr>
+                          <tr>
+                            <td>Quinn Flynn</td>
+                            <td>Support Lead</td>
+                            <td>Edinburgh</td>
+                            <td>22</td>
+                            <td>2013/03/03</td>
+                            <td>$342,000</td>
+                          </tr>
+                          <tr>
+                            <td>Charde Marshall</td>
+                            <td>Regional Director</td>
+                            <td>San Francisco</td>
+                            <td>36</td>
+                            <td>2008/10/16</td>
+                            <td>$470,600</td>
+                          </tr>
+                          <tr>
+                            <td>Haley Kennedy</td>
+                            <td>Senior Marketing Designer</td>
+                            <td>London</td>
+                            <td>43</td>
+                            <td>2012/12/18</td>
+                            <td>$313,500</td>
+                          </tr>
+                          <tr>
+                            <td>Tatyana Fitzpatrick</td>
+                            <td>Regional Director</td>
+                            <td>London</td>
+                            <td>19</td>
+                            <td>2010/03/17</td>
+                            <td>$385,750</td>
+                          </tr>
+                          <tr>
+                            <td>Michael Silva</td>
+                            <td>Marketing Designer</td>
+                            <td>London</td>
+                            <td>66</td>
+                            <td>2012/11/27</td>
+                            <td>$198,500</td>
+                          </tr>
+                          <tr>
+                            <td>Paul Byrd</td>
+                            <td>Chief Financial Officer (CFO)</td>
+                            <td>New York</td>
+                            <td>64</td>
+                            <td>2010/06/09</td>
+                            <td>$725,000</td>
+                          </tr>
+                          <tr>
+                            <td>Gloria Little</td>
+                            <td>Systems Administrator</td>
+                            <td>New York</td>
+                            <td>59</td>
+                            <td>2009/04/10</td>
+                            <td>$237,500</td>
+                          </tr>
+                          <tr>
+                            <td>Bradley Greer</td>
+                            <td>Software Engineer</td>
+                            <td>London</td>
+                            <td>41</td>
+                            <td>2012/10/13</td>
+                            <td>$132,000</td>
+                          </tr>
+                          <tr>
+                            <td>Dai Rios</td>
+                            <td>Personnel Lead</td>
+                            <td>Edinburgh</td>
+                            <td>35</td>
+                            <td>2012/09/26</td>
+                            <td>$217,500</td>
+                          </tr>
+                          <tr>
+                            <td>Jenette Caldwell</td>
+                            <td>Development Lead</td>
+                            <td>New York</td>
+                            <td>30</td>
+                            <td>2011/09/03</td>
+                            <td>$345,000</td>
+                          </tr>
+                          <tr>
+                            <td>Yuri Berry</td>
+                            <td>Chief Marketing Officer (CMO)</td>
+                            <td>New York</td>
+                            <td>40</td>
+                            <td>2009/06/25</td>
+                            <td>$675,000</td>
+                          </tr>
+                          <tr>
+                            <td>Caesar Vance</td>
+                            <td>Pre-Sales Support</td>
+                            <td>New York</td>
+                            <td>21</td>
+                            <td>2011/12/12</td>
+                            <td>$106,450</td>
+                          </tr>
+                          <tr>
+                            <td>Doris Wilder</td>
+                            <td>Sales Assistant</td>
+                            <td>Sidney</td>
+                            <td>23</td>
+                            <td>2010/09/20</td>
+                            <td>$85,600</td>
+                          </tr>
+                          <tr>
+                            <td>Angelica Ramos</td>
+                            <td>Chief Executive Officer (CEO)</td>
+                            <td>London</td>
+                            <td>47</td>
+                            <td>2009/10/09</td>
+                            <td>$1,200,000</td>
+                          </tr>
+                          <tr>
+                            <td>Gavin Joyce</td>
+                            <td>Developer</td>
+                            <td>Edinburgh</td>
+                            <td>42</td>
+                            <td>2010/12/22</td>
+                            <td>$92,575</td>
+                          </tr>
+                          <tr>
+                            <td>Jennifer Chang</td>
+                            <td>Regional Director</td>
+                            <td>Singapore</td>
+                            <td>28</td>
+                            <td>2010/11/14</td>
+                            <td>$357,650</td>
+                          </tr>
+                          <tr>
+                            <td>Brenden Wagner</td>
+                            <td>Software Engineer</td>
+                            <td>San Francisco</td>
+                            <td>28</td>
+                            <td>2011/06/07</td>
+                            <td>$206,850</td>
+                          </tr>
+                          <tr>
+                            <td>Fiona Green</td>
+                            <td>Chief Operating Officer (COO)</td>
+                            <td>San Francisco</td>
+                            <td>48</td>
+                            <td>2010/03/11</td>
+                            <td>$850,000</td>
+                          </tr>
+                          <tr>
+                            <td>Shou Itou</td>
+                            <td>Regional Marketing</td>
+                            <td>Tokyo</td>
+                            <td>20</td>
+                            <td>2011/08/14</td>
+                            <td>$163,000</td>
+                          </tr>
+                          <tr>
+                            <td>Michelle House</td>
+                            <td>Integration Specialist</td>
+                            <td>Sidney</td>
+                            <td>37</td>
+                            <td>2011/06/02</td>
+                            <td>$95,400</td>
+                          </tr>
+                          <tr>
+                            <td>Suki Burks</td>
+                            <td>Developer</td>
+                            <td>London</td>
+                            <td>53</td>
+                            <td>2009/10/22</td>
+                            <td>$114,500</td>
+                          </tr>
+                          <tr>
+                            <td>Prescott Bartlett</td>
+                            <td>Technical Author</td>
+                            <td>London</td>
+                            <td>27</td>
+                            <td>2011/05/07</td>
+                            <td>$145,000</td>
+                          </tr>
+                          <tr>
+                            <td>Gavin Cortez</td>
+                            <td>Team Leader</td>
+                            <td>San Francisco</td>
+                            <td>22</td>
+                            <td>2008/10/26</td>
+                            <td>$235,500</td>
+                          </tr>
+                          <tr>
+                            <td>Martena Mccray</td>
+                            <td>Post-Sales support</td>
+                            <td>Edinburgh</td>
+                            <td>46</td>
+                            <td>2011/03/09</td>
+                            <td>$324,050</td>
+                          </tr>
+                          <tr>
+                            <td>Unity Butler</td>
+                            <td>Marketing Designer</td>
+                            <td>San Francisco</td>
+                            <td>47</td>
+                            <td>2009/12/09</td>
+                            <td>$85,675</td>
+                          </tr>
+                          <tr>
+                            <td>Howard Hatfield</td>
+                            <td>Office Manager</td>
+                            <td>San Francisco</td>
+                            <td>51</td>
+                            <td>2008/12/16</td>
+                            <td>$164,500</td>
+                          </tr>
+                          <tr>
+                            <td>Hope Fuentes</td>
+                            <td>Secretary</td>
+                            <td>San Francisco</td>
+                            <td>41</td>
+                            <td>2010/02/12</td>
+                            <td>$109,850</td>
+                          </tr>
+                          <tr>
+                            <td>Vivian Harrell</td>
+                            <td>Financial Controller</td>
+                            <td>San Francisco</td>
+                            <td>62</td>
+                            <td>2009/02/14</td>
+                            <td>$452,500</td>
+                          </tr>
+                          <tr>
+                            <td>Timothy Mooney</td>
+                            <td>Office Manager</td>
+                            <td>London</td>
+                            <td>37</td>
+                            <td>2008/12/11</td>
+                            <td>$136,200</td>
+                          </tr>
+                          <tr>
+                            <td>Jackson Bradshaw</td>
+                            <td>Director</td>
+                            <td>New York</td>
+                            <td>65</td>
+                            <td>2008/09/26</td>
+                            <td>$645,750</td>
+                          </tr>
+                          <tr>
+                            <td>Olivia Liang</td>
+                            <td>Support Engineer</td>
+                            <td>Singapore</td>
+                            <td>64</td>
+                            <td>2011/02/03</td>
+                            <td>$234,500</td>
+                          </tr>
+                          <tr>
+                            <td>Bruno Nash</td>
+                            <td>Software Engineer</td>
+                            <td>London</td>
+                            <td>38</td>
+                            <td>2011/05/03</td>
+                            <td>$163,500</td>
+                          </tr>
+                          <tr>
+                            <td>Sakura Yamamoto</td>
+                            <td>Support Engineer</td>
+                            <td>Tokyo</td>
+                            <td>37</td>
+                            <td>2009/08/19</td>
+                            <td>$139,575</td>
+                          </tr>
+                          <tr>
+                            <td>Thor Walton</td>
+                            <td>Developer</td>
+                            <td>New York</td>
+                            <td>61</td>
+                            <td>2013/08/11</td>
+                            <td>$98,540</td>
+                          </tr>
+                          <tr>
+                            <td>Finn Camacho</td>
+                            <td>Support Engineer</td>
+                            <td>San Francisco</td>
+                            <td>47</td>
+                            <td>2009/07/07</td>
+                            <td>$87,500</td>
+                          </tr>
+                          <tr>
+                            <td>Serge Baldwin</td>
+                            <td>Data Coordinator</td>
+                            <td>Singapore</td>
+                            <td>64</td>
+                            <td>2012/04/09</td>
+                            <td>$138,575</td>
+                          </tr>
+                          <tr>
+                            <td>Zenaida Frank</td>
+                            <td>Software Engineer</td>
+                            <td>New York</td>
+                            <td>63</td>
+                            <td>2010/01/04</td>
+                            <td>$125,250</td>
+                          </tr>
+                          <tr>
+                            <td>Zorita Serrano</td>
+                            <td>Software Engineer</td>
+                            <td>San Francisco</td>
+                            <td>56</td>
+                            <td>2012/06/01</td>
+                            <td>$115,000</td>
+                          </tr>
+                          <tr>
+                            <td>Jennifer Acosta</td>
+                            <td>Junior Javascript Developer</td>
+                            <td>Edinburgh</td>
+                            <td>43</td>
+                            <td>2013/02/01</td>
+                            <td>$75,650</td>
+                          </tr>
+                          <tr>
+                            <td>Cara Stevens</td>
+                            <td>Sales Assistant</td>
+                            <td>New York</td>
+                            <td>46</td>
+                            <td>2011/12/06</td>
+                            <td>$145,600</td>
+                          </tr>
+                          <tr>
+                            <td>Hermione Butler</td>
+                            <td>Regional Director</td>
+                            <td>London</td>
+                            <td>47</td>
+                            <td>2011/03/21</td>
+                            <td>$356,250</td>
+                          </tr>
+                          <tr>
+                            <td>Lael Greer</td>
+                            <td>Systems Administrator</td>
+                            <td>London</td>
+                            <td>21</td>
+                            <td>2009/02/27</td>
+                            <td>$103,500</td>
+                          </tr>
+                          <tr>
+                            <td>Jonas Alexander</td>
+                            <td>Developer</td>
+                            <td>San Francisco</td>
+                            <td>30</td>
+                            <td>2010/07/14</td>
+                            <td>$86,500</td>
+                          </tr>
+                          <tr>
+                            <td>Shad Decker</td>
+                            <td>Regional Director</td>
+                            <td>Edinburgh</td>
+                            <td>51</td>
+                            <td>2008/11/13</td>
+                            <td>$183,000</td>
+                          </tr>
+                          <tr>
+                            <td>Michael Bruce</td>
+                            <td>Javascript Developer</td>
+                            <td>Singapore</td>
+                            <td>29</td>
+                            <td>2011/06/27</td>
+                            <td>$183,000</td>
+                          </tr>
+                          <tr>
+                            <td>Donna Snider</td>
+                            <td>Customer Support</td>
+                            <td>New York</td>
+                            <td>27</td>
+                            <td>2011/01/25</td>
+                            <td>$112,000</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            {/* ============================================================== */}
+            {/* End PAge Content */}
+            {/* ============================================================== */}
+            {/* ============================================================== */}
+            {/* Right sidebar */}
+            {/* ============================================================== */}
+            {/* .right-sidebar */}
+            {/* ============================================================== */}
+            {/* End Right sidebar */}
+            {/* ============================================================== */}
           </div>
         </div>
       </div>
+</>
+  )
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Modal for editing food item */}
-      <div className="modal fade" id="editModal" tabIndex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="editModalLabel">Edit Food</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <h6>Edit Food</h6>
-              <form className='editforms p-0'>
-                <div className='p-0'>
-                  <label htmlFor="name">Name:</label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={editedFood.name}
-                    onChange={(e) => setEditedFood({ ...editedFood, name: e.target.value })}
-                  />
-                </div>
-                <div className='p-0'>
-                  <label htmlFor="price">Price:</label>
-                  <input
-                    type="number"
-                    id="price"
-                    value={editedFood.price}
-                    onChange={(e) => setEditedFood({ ...editedFood, price: e.target.value })}
-                  />
-                </div>
-                <div className='p-0'>
-                  <label htmlFor="description">Description:</label>
-                  <textarea
-                    id="description"
-                    value={editedFood.description}
-                    onChange={(e) => setEditedFood({ ...editedFood, description: e.target.value })}
-                  />
-                </div>
-                <div className='p-0'>
-                  <label htmlFor="foodtype">Food Type:</label>
-                  <select
-                    id="foodtype"
-                    value={editedFood.foodtype}
-                    onChange={(e) => setEditedFood({ ...editedFood, foodtype: e.target.value })}
-                  >
-                    <option value="veg">Veg</option>
-                    <option value="nonVeg">Non-Veg</option>
-                  </select>
-                </div>
-                <div className='p-0'>
-                  <label htmlFor="foodcategory">Food Category:</label>
-                  <select
-                    id="foodcategory"
-                    value={editedFood.foodcategory}
-                    onChange={(e) => setEditedFood({ ...editedFood, foodcategory: e.target.value })}
-                  >
-                    <option value="">Select Food Category</option>
-                    {foodList.map(food => (
-                      <option key={food._id} value={food.foodname}>{food.foodname}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className='p-0'>
-                  <label htmlFor="subcategorys">Subcategory:</label>
-                  <input
-                    type="text"
-                    id="subcategorys"
-                    value={editedFood.subcategorys}
-                    onChange={(e) => setEditedFood({ ...editedFood, subcategorys: e.target.value })}
-                  />
-                </div>
-                <div className='p-0'>
-                  <label htmlFor="discount">Discount:</label>
-                  <input
-                    type="text"
-                    id="discount"
-                    value={editedFood.discount}
-                    onChange={(e) => setEditedFood({ ...editedFood, discount: e.target.value })}
-                  />
-                </div>
-                <div className='p-0'>
-                  <label htmlFor="foodimg">Image URL:</label>
-                  <input
-                    type="text"
-                    id="foodimg"
-                    value={editedFood.foodimg}
-                    onChange={(e) => setEditedFood({ ...editedFood, foodimg: e.target.value })}
-                  />
-                </div>
-              </form>
-            </div>
-
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary" onClick={handleUpdate}>Update</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Productlist;
+export default Productlist
