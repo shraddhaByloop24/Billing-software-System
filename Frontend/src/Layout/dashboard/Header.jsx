@@ -72,7 +72,7 @@ const Header = () => {
                   href="javascript:void(0)"
                   data-sidebartype="mini-sidebar"
                 >
-                  <i className="mdi mdi-menu font-24" />
+                  <i class="fa-solid fa-bars"></i>
                 </a>
               </li>
               {/* ============================================================== */}
@@ -123,7 +123,7 @@ const Header = () => {
                   className="nav-link waves-effect waves-dark"
                   href="javascript:void(0)"
                 >
-                  <i className="mdi mdi-magnify fs-4" />
+                 <i class="fa-solid fa-magnifying-glass"></i>
                 </a>
                 <form className="app-search position-absolute">
                   <input
@@ -132,7 +132,7 @@ const Header = () => {
                     placeholder="Search & enter"
                   />
                   <a className="srh-btn">
-                    <i className="mdi mdi-window-close" />
+                  <i class="fa-solid fa-bars"></i>
                   </a>
                 </form>
               </li>
@@ -153,7 +153,7 @@ const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i className="mdi mdi-bell font-24" />
+                  <i className="font-22 fa-solid fa-bell"></i>
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
@@ -191,7 +191,7 @@ const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i className="font-24 mdi mdi-comment-processing" />
+                  <i className="font-22 fa-solid fa-message"></i>
                 </a>
                 <ul
                   className="
@@ -216,7 +216,7 @@ const Header = () => {
                           justify-content-center
                         "
                             >
-                              <i className="mdi mdi-calendar text-white fs-4" />
+                              <i className="mdi mdi-calendar text-white fs-2" />
                             </span>
                             <div className="ms-2">
                               <h5 className="mb-0">Event today</h5>
@@ -318,7 +318,7 @@ const Header = () => {
                   <img
                     src="icons/1.jpg"
                     alt="user"
-                    className="rounded-circle"
+                    className="rounded-circle pb-2"
                     width={31}
                   />
                 </a>
