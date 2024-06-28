@@ -47,7 +47,7 @@ function Login() {
                                 name='email'
                                 value={email}
                                 placeholder="Email Address"
-                                className="form-control"
+                                className="form-control form-control-login"
                                 onChange={(e)=>setEmail(e.target.value)}
                             />
                             <i className="zmdi zmdi-email" />
@@ -58,7 +58,7 @@ function Login() {
                             <input
                                 type="password"
                                 placeholder="Password"
-                                className="form-control"
+                                className="form-control form-control-login"
                                 name='password'
                                 value={password}
                                 onChange={(e)=>setPassword(e.target.value)}
