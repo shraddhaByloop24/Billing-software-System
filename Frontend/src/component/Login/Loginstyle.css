@@ -60,18 +60,20 @@ a:hover {
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
-
+    background-color:#121481;
 }
 
 .inner {
+    /* background-color: rgb(0, 0, 128); */
     padding: 20px;
     background: #fff;
-    max-width: 850px;
+    max-width: 950px;
+    height:500px ;
     margin: auto;
     display: flex;
     box-shadow: 0px 0px 30px gray;
-    border-radius: 20px;
-    border: 2px solid rgba(128, 128, 128, 0.423);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.423);
 }
 
 .inner .image-holder {
@@ -119,7 +121,7 @@ a:hover {
 }
 
 .form-control {
-    border: 1px solid #333;
+    border: 1px solid gray;
     border-top: none;
     border-right: none;
     border-left: none;
@@ -132,6 +134,7 @@ a:hover {
 
 .form-control::-webkit-input-placeholder {
     font-size: 13px;
+    padding: 10px;
     color: #333;
     font-family: poppins-regular
 }
