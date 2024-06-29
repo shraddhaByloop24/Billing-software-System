@@ -5401,6 +5401,7 @@ input[type=submit].btn-block {
 .navbar .container-sm,
 .navbar .container-xl {
     display: -webkit-box;
+    
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -12913,25 +12914,28 @@ html[dir=ltr] body .p-l-0 {
     padding-left: 0
 }
 
-#main-wrapper {}
+#main-wrapper {
+    
+}
 
 #main-wrapper .topbar .top-navbar .navbar-header[data-logobg=skin5] {
-    background: #1F262D
+    background-color: navy;
 }
 
 #main-wrapper .topbar .navbar-collapse[data-navbarbg=skin5],
 #main-wrapper .topbar[data-navbarbg=skin5] {
-    background: #1F262D
+    background: navy;
+    
 }
 
 #main-wrapper .left-sidebar[data-sidebarbg=skin5],
 #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul {
-    background: #1F262D
+    background-color:  navy;
 }
 
 #main-wrapper .left-sidebar[data-sidebarbg=skin5] .create-btn,
 #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul .create-btn {
-    background: #27a9e3
+    background: navy;
 }
 
 #main-wrapper {

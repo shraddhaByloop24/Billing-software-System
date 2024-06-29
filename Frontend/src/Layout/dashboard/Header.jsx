@@ -11,7 +11,7 @@ const Header = () => {
       {/* ============================================================== */}
       <header className="topbar" data-navbarbg="skin5">
         <nav className="navbar top-navbar navbar-expand-md navbar-dark">
-          <div className="navbar-header" data-logobg="skin5">
+          <div className="navbar-header "  data-logobg="skin5">
             {/* ============================================================== */}
             {/* Logo */}
             {/* ============================================================== */}
@@ -29,15 +29,14 @@ const Header = () => {
               </b>
               {/*End Logo icon */}
               {/* Logo text */}
-              <span className="logo-text ms-1 pt-2">
+              <span className="logo-text  ms-1 pt-2">
                 {/* dark Logo text */}
                 <img
-                  src="icons/Byloop.png"
+                  src="icons/main-logo.png"
                   alt="homepage"
-
                   className="light-logo text-center img-fluid"
-                  width={120}
-                />
+                  width={60}
+                />Billing System
               </span>
 
             </a>
@@ -58,18 +57,18 @@ const Header = () => {
           {/* End Logo */}
           {/* ============================================================== */}
           <div
-            className="navbar-collapse collapse"
+            className="navbar-collapse collapse  "
             id="navbarSupportedContent"
             data-navbarbg="skin5"
           >
             {/* ============================================================== */}
             {/* toggle and nav items */}
             {/* ============================================================== */}
-            <ul className="navbar-nav float-start me-auto">
+            <ul className="navbar-nav float-start me-auto bg-info">
               <li className="nav-item d-none d-lg-block">
                 <a
                   className="nav-link sidebartoggler waves-effect waves-light"
-                  href="javascript:void(0)"
+                  
                   data-sidebartype="mini-sidebar"
                 >
                   <i class="fa-solid fa-bars"></i>

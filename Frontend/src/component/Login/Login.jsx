@@ -31,54 +31,86 @@ function Login() {
 
   return (
     <>
-       <div className="wrapper shadow" >
-            <div className="container main-inner">
-                <div className="inner ">
-                    <div className="image-holder">
-                        <img src="/image/5377028.jpg"alt="" />
-                    </div>
-                    <form action="" onSubmit={handleSubmit}>
-                        <h3>Login Form</h3>
-                        <p>Enter your credentials to log in.</p>
-
-                        <div className="form-wrapper">
-                            <input
-                                type="email"
-                                name='email'
-                                value={email}
-                                placeholder="Email Address"
-                                className="form-control form-control-login"
-                                onChange={(e)=>setEmail(e.target.value)}
-                            />
-                            <i className="zmdi zmdi-email" />
-                        </div>
-                       
-
-                        <div className="form-wrapper">
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                className="form-control form-control-login"
-                                name='password'
-                                value={password}
-                                onChange={(e)=>setPassword(e.target.value)}
-                            />
-                            <i className="zmdi zmdi-lock" />
-                        </div>
-               
-                  
-                        <button type="submit">
-                            Login
-                            <i className="zmdi zmdi-arrow-right" />
-                        </button>
-                        <div className=' text-center pt-2'>
-                          <span>New on our platform? <Link to="/Signup" className='unique'>Create an account</Link></span>
-                        </div>
-
-                    </form>
-                </div>
+    <div className="container-fluid backk">
+        <h1 className='text-start pt-4 text-white px-5'>SBS Logo </h1>
+        {/* <img src="icons/Byloop.png" className='img-fluid p-0 mx-3 bg-dark' width={150} alt="" /> */}
+      <div className="wrapper " >
+        <div className="container main-inner  p-3">
+          <div className="inner ">
+            <div className="image-holder">
+              <img src="/image/6333204.jpg" alt="" />
             </div>
+            <form action="" onSubmit={handleSubmit}>
+              <h1>Login Form</h1>
+              <p className='pt-1'>Enter your credentials to log in.</p>
+
+              <div className="form-wrapper">
+                <input
+                  type="email"
+                  name='email'
+                  value={email}
+                  placeholder="Email Address"
+                  className="form-control form-control-login"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <i className="zmdi zmdi-email" />
+              </div>
+
+
+              <div className="form-wrapper">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="form-control form-control-login"
+                  name='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <i className="zmdi zmdi-lock" />
+              </div>
+
+
+              <button className="custom-btn btn-2  ">Sign In</button>
+              <div className=' text-start pt-2'>
+                <span>New on our platform? <Link to="/Signup" className='unique'>Create an account</Link></span>
+              </div>
+
+              <div className="icons pt-4">
+                <div className="social mx-2 ">
+                  <a href="#">
+                    <i className="social-icon fab fa-facebook-f" />
+                  </a>
+                </div>
+                <div className="social mx-2">
+                  <a href="#">
+                    <i className="social-icon fab fa-twitter" />
+                  </a>
+                </div>
+                <div className="social mx-2">
+                  <a href="#">
+                    <i className="social-icon fab fa-google-plus-g" />
+                  </a>
+                </div>
+                <div className="social mx-2">
+                  <a href="#">
+                    <i className="social-icon fab fa-instagram" />
+                  </a>
+                </div>
+                <div className="social mx-2">
+                  <a href="#">
+                    <i className="social-icon fab fa-linkedin-in" />
+                  </a>
+                </div>
+              </div>
+
+
+              
+
+            </form>
+          </div>
         </div>
+      </div>
+      </div>
     </>
   );
 }
