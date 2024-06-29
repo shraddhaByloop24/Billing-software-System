@@ -33,9 +33,9 @@ function Login() {
     <>
        <div className="wrapper shadow" >
             <div className="container main-inner">
-                <div className="inner">
+                <div className="inner ">
                     <div className="image-holder">
-                        <img src="/image/login.jpg" height={380} alt="" />
+                        <img src="/image/5377028.jpg"alt="" />
                     </div>
                     <form action="" onSubmit={handleSubmit}>
                         <h3>Login Form</h3>
