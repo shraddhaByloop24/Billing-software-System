@@ -13,12 +13,12 @@ const Calculated = () => {
   <div className="row">
     {/* Column */}
     <div className="col-md-6 col-lg-2 col-xlg-3">
-      <div className="card card-hover bg-cyan  p-4">
+      <div className="card card-hover bg-cyan p-4">
         <div className="box text-center">
-          <h1 className="font-light text-white">
+          <h1 className="font-light text-white ">
             <i className="mdi mdi-view-dashboard" />
           </h1>
-          <h6 className="text-white">Dashboard</h6>
+          <h6 className="text-white pb-2">Dashboard</h6>
         </div>
       </div>
     </div>
