@@ -23,7 +23,7 @@ const Dashboard = () => {
       >
     <Header/>
     <Backbtn/>
-    <Calculated/>
+    {/* <Calculated/> */}
     </div>
     </>
   );

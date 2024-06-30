@@ -102,7 +102,7 @@ body {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #3e5569;
+    color: #d9ebfb ;
     text-align: left;
     background-color: #eeeeee
 }
@@ -12918,9 +12918,7 @@ html[dir=ltr] body .p-l-0 {
     
 }
 
-#main-wrapper .topbar .top-navbar .navbar-header[data-logobg=skin5] {
-    background-color: navy;
-}
+
 
 #main-wrapper .topbar .navbar-collapse[data-navbarbg=skin5],
 #main-wrapper .topbar[data-navbarbg=skin5] {
@@ -12930,7 +12928,7 @@ html[dir=ltr] body .p-l-0 {
 
 #main-wrapper .left-sidebar[data-sidebarbg=skin5],
 #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul {
-    background-color:  navy;
+    background-color:  #071952;
 }
 
 #main-wrapper .left-sidebar[data-sidebarbg=skin5] .create-btn,
@@ -13697,9 +13695,6 @@ ul.list-style-none li a:hover {
     padding: 0 15px
 }
 
-#navbarSupportedContent {
-    background: #141619 !important
-}
 
 .search-box .app-search {
     z-index: 110;
@@ -18753,3 +18748,30 @@ label {
         display: block !important
     }
 }
+
+
+/* My CSS============================================ */
+.logo-text{
+    /* background-color: #071952; */
+    color: white;
+
+}
+#navbarSupportedContent {
+    /* header color */
+    background: #fff !important;
+    color: black;
+    
+}
+#navbarSupportedContent i{ 
+    color: black;
+}
+#navbarSupportedContent span{
+    color: black;
+}
+#main-wrapper .topbar .top-navbar .navbar-header[data-logobg=skin5] {
+    background-color: #071952;
+
+}
+.left-sidebar.closed {
+    display: none;
+  }

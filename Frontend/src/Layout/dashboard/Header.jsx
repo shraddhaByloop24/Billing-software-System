@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
 import './Header.css'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+
   return (
     <>
 
@@ -15,7 +22,7 @@ const Header = () => {
             {/* ============================================================== */}
             {/* Logo */}
             {/* ============================================================== */}
-            <a className="navbar-brand" href="index.html">
+            <a className="navbar-brand" href="">
               {/* Logo icon */}
               <b className="logo-icon ps-2">
                 {/*You can put here icon as well // <i class="wi wi-sunset"></i> //*/}
@@ -29,7 +36,7 @@ const Header = () => {
               </b>
               {/*End Logo icon */}
               {/* Logo text */}
-              <span className="logo-text  ms-1 pt-2">
+              <span className="logo-text  ms-1 pt-0 ">
                 {/* dark Logo text */}
                 <img
                   src="icons/main-logo.png"
@@ -46,11 +53,8 @@ const Header = () => {
             {/* ============================================================== */}
             {/* Toggle which is visible on mobile only */}
             {/* ============================================================== */}
-            <a
-              className="nav-toggler waves-effect waves-light d-block d-md-none"
-              href="javascript:void(0)"
-            >
-              <i className="ti-menu ti-close" />
+            <a className="nav-toggler waves-effect waves-light d-block d-md-none" onClick={handleSidebarToggle} >
+              <i className={sidebarOpen ? 'ti-close' : 'ti-menu'} />
             </a>
           </div>
           {/* ============================================================== */}
@@ -64,7 +68,7 @@ const Header = () => {
             {/* ============================================================== */}
             {/* toggle and nav items */}
             {/* ============================================================== */}
-            <ul className="navbar-nav float-start me-auto bg-info">
+            <ul className="navbar-nav float-start me-auto ">
               <li className="nav-item d-none d-lg-block">
                 <a
                   className="nav-link sidebartoggler waves-effect waves-light"
@@ -143,7 +147,7 @@ const Header = () => {
               {/* ============================================================== */}
               {/* Comment */}
               {/* ============================================================== */}
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown ">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -366,7 +370,8 @@ const Header = () => {
       {/* ============================================================== */}
       {/* Left Sidebar - style you can find in sidebar.scss  */}
       {/* ============================================================== */}
-      <aside className="left-sidebar" data-sidebarbg="skin5">
+      <aside className={`left-sidebar ${sidebarOpen ? '' : 'closed'}`}
+        data-sidebarbg="skin5">
         {/* Sidebar scroll*/}
         <div className="scroll-sidebar">
           {/* Sidebar navigation*/}

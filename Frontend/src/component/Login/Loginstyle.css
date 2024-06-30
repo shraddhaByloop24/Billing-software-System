@@ -391,6 +391,7 @@ select option[value=""][disabled] {
     }
 
     button {
-        margin-top: 60px
+        margin-top: 60px;
+        background-color: rgb(164, 153, 153);
     }
 }
