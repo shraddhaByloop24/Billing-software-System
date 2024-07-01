@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Header from './dashboard/Header';
 import './Style.css'
+import Swal from 'sweetalert2';
 
 const Addproducts = () => {
   const [itemname, setItemname] = useState('');
@@ -52,22 +53,21 @@ const Addproducts = () => {
       formData.append('foodtype', foodtype);
       formData.append('customizations', JSON.stringify(customizations));
       formData.append('filters', JSON.stringify(filters));
-
-      const response = await axios.post('https://06f6-2405-201-301d-f0d5-4087-a9fc-2f97-5ac1.ngrok-free.app/api/products', formData, {
+      const response = await axios.post('https://f12a-2405-201-301d-f0d5-908b-552e-3045-d644.ngrok-free.app/api/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
       if (response.status === 200) {
-        console.log('Product added successfully');
+        Swal.fire('Success!', 'Product added successfully', 'uccess');
       } else {
         alert('Product addition failed. Please check your input and try again.');
       }
     } catch (error) {
       console.error('Error adding product:', error);
     }
-  };
+  }
 
   return (
     <div
@@ -108,103 +108,104 @@ const Addproducts = () => {
               <div className="row p-3">
                 <div className="col-lg-8">
                   <form onSubmit={handleSubmit}>
-                    <h2>Create New Product</h2>
-                    <label>
-                      Item Name:
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={itemname}
-                        onChange={(event) => setItemname(event.target.value)}
-                        required
-                      />
-                    </label>
+                    {/* <h2 className='heading'>Create New Product</h2> */}
+                    <div className="row">
+                      <label className='w-100 col-lg-6'>
+                        Item Name:
+                        <input
+                          className="form-control border"
+                          type="text"
+                          value={itemname}
+                          onChange={(event) => setItemname(event.target.value)}
+                          required
+                        />
+                      </label>
+                      <br />
+
+                      <label className='w-100 col-lg-6'>
+                        Base Price:
+                        <input
+                          className="form-control border"
+                          type="number"
+                          value={baseprice}
+                          onChange={(event) => setBaseprice(event.target.value)}
+                          required
+                        />
+                      </label>
+                    </div>
                     <br />
-                    <label>
-                      Description:
-                      <textarea
-                        className="form-control"
-                        value={description}
-                        onChange={(event) => setDescription(event.target.value)}
-                      />
-                    </label>
+                    <div className="row">
+                      <label className='w-100 col-lg-6'>
+                        Category:
+                        <input
+                          className="form-control border"
+                          type="text"
+                          value={category}
+                          onChange={(event) => setCategory(event.target.value)}
+                          required
+                        />
+                      </label>
+                      <br />
+                      <label className="w-100 col-lg-6">
+                        Subcategory:
+                        <input
+                          className="form-control border"
+                          type="text"
+                          value={subcategory}
+                          onChange={(event) => setSubcategory(event.target.value)}
+                          required
+                        />
+                      </label>
+                    </div>
                     <br />
-                    <label>
-                      Base Price:
-                      <input
-                        className="form-control"
-                        type="number"
-                        value={baseprice}
-                        onChange={(event) => setBaseprice(event.target.value)}
-                        required
-                      />
-                    </label>
+                    <div className="row">
+                      <label className="w-100 col-lg-6">
+                        Discount:
+                        <input
+                          className="form-control border"
+                          type="number"
+                          value={discount}
+                          onChange={(event) => setDiscount(event.target.value)}
+                        />
+                      </label>
+                      <br />
+                      <label className="w-100 col-lg-6">
+                        Quantity Available:
+                        <input
+                          className="form-control border"
+                          type="number"
+                          value={quantityavailable}
+                          onChange={(event) => setQuantityavailable(event.target.value)}
+                        />
+                      </label>
+                    </div>  
                     <br />
-                    <label>
-                      Category:
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={category}
-                        onChange={(event) => setCategory(event.target.value)}
-                        required
-                      />
-                    </label>
+                    <div className="row">
+                      <label className="w-100 col-lg-6">
+                        Image:
+                        <input
+                          className="form-control border"
+                          type="file"
+                          onChange={(event) => setImage(event.target.files[0])}
+                        />
+                      </label>
+                      <br />
+                      <label className="w-100 col-lg-6">
+                        Cuisine:
+                        <input
+                          className="form-control border"
+                          type="text"
+                          value={cuisine}
+                          onChange={(event) => setCuisine(event.target.value)}
+                        />
+                      </label>
+                    </div>
                     <br />
-                    <label>
-                      Subcategory:
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={subcategory}
-                        onChange={(event) => setSubcategory(event.target.value)}
-                        required
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      Discount:
-                      <input
-                        className="form-control"
-                        type="number"
-                        value={discount}
-                        onChange={(event) => setDiscount(event.target.value)}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      Quantity Available:
-                      <input
-                        className="form-control"
-                        type="number"
-                        value={quantityavailable}
-                        onChange={(event) => setQuantityavailable(event.target.value)}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      Image:
-                      <input
-                        className="form-control"
-                        type="file"
-                        onChange={(event) => setImage(event.target.files[0])}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      Cuisine:
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={cuisine}
-                        onChange={(event) => setCuisine(event.target.value)}
-                      />
-                    </label>
-                    <br />
-                    <label>
+                    
+                    <label className="w-100">
                       Food Type:
                       <input
-                        className="form-control"
+                        className="form-control border"
                         type="text"
                         value={foodtype}
                         onChange={(event) => setFoodtype(event.target.value)}
@@ -213,10 +214,11 @@ const Addproducts = () => {
                     <br />
                     {customizations.map((customization, index) => (
                       <div key={index}>
-                        <label>
+                        
+                        <label className="w-100">
                           Customization Type:
                           <input
-                            className="form-control"
+                            className="form-control border"
                             type="text"
                             name="customizationsType"
                             value={customization.customizationsType}
@@ -226,10 +228,10 @@ const Addproducts = () => {
                         <br />
                         {customization.customizations.map((cust, custIndex) => (
                           <div key={custIndex}>
-                            <label>
+                            <label className="w-100">
                               Customization Name:
                               <input
-                                className="form-control"
+                                className="form-control border"
                                 type="text"
                                 name="customizationName"
                                 data-index={custIndex}
@@ -238,10 +240,10 @@ const Addproducts = () => {
                               />
                             </label>
                             <br />
-                            <label>
+                            <label className="w-100">
                               Additional Price:
                               <input
-                                className="form-control"
+                                className="form-control border"
                                 type="number"
                                 name="additionalprice"
                                 data-index={custIndex}
@@ -254,28 +256,47 @@ const Addproducts = () => {
                         ))}
                       </div>
                     ))}
-                    <button type="button" className="btn btn-secondary" onClick={handleAddCustomization}>Add Customization</button>
+                    <button type="button" className="custom btn-2 " onClick={handleAddCustomization}> Customization</button>
                     <br />
-                    <label>
-                      Gluten Free:
-                      <select className="form-control" name="GlutenFree" value={filters.GlutenFree} onChange={handleFiltersChange}>
-                        <option value="">Select</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                      </select>
-                    </label>
+                    <div className="row mt-3">
+                      <label className="w-100 col-lg-6">
+                        Gluten Free:
+                        <select className="form-control border" name="GlutenFree" value={filters.GlutenFree} onChange={handleFiltersChange}>
+                          <option value="">Select</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                      </label>
+                      <br />
+                      <label className="w-100 col-lg-6">
+                        Spicy:
+                        <select className="form-control border" name="Spicy" value={filters.Spicy} onChange={handleFiltersChange}>
+                          <option value="">Select</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                      </label>
+                    </div>
                     <br />
-                    <label>
-                      Spicy:
-                      <select className="form-control" name="Spicy" value={filters.Spicy} onChange={handleFiltersChange}>
-                        <option value="">Select</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                      </select>
+                    <label className="w-100">
+                      Description:
+                      <textarea
+                        className="form-control border"
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                      />
                     </label>
                     <br />
                     <button type="submit" className="btn btn-primary">Submit</button>
                   </form>
+                </div>
+                <div className="col-lg-4">
+                  <div className='shadow'>
+                    <img src="image/30727.jpg" alt="" />
+                  </div>
+                  <div className='mt-3 shadow p-3'>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque alias laboriosam quos aliquid neque repudiandae odit, sunt expedita excepturi nesciunt, nam modi enim? Cupiditate optio ducimus excepturi quos saepe. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente maxime quo molestias voluptatibus iste perferendis consectetur tenetur consequatur quas, possimus beatae quisquam debitis facilis unde mollitia! Quas et dolor maiores!</p>
+                    </div>
                 </div>
               </div>
             </div>
@@ -283,6 +304,7 @@ const Addproducts = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

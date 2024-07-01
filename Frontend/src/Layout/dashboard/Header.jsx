@@ -25,7 +25,7 @@ const Header = () => {
             <a className="navbar-brand" href="">
               {/* Logo icon */}
               <b className="logo-icon ps-2">
-                {/*You can put here icon as well // <i class="wi wi-sunset"></i> //*/}
+                {/*You can put here icon as well // <i className="wi wi-sunset"></i> //*/}
                 {/* Dark Logo icon */}
                 {/* <img
                     src="icons/Byloop.png"
@@ -75,7 +75,7 @@ const Header = () => {
                   
                   data-sidebartype="mini-sidebar"
                 >
-                  <i class="fa-solid fa-bars"></i>
+                  <i className="fa-solid fa-bars"></i>
                 </a>
               </li>
               {/* ============================================================== */}
@@ -126,7 +126,7 @@ const Header = () => {
                   className="nav-link waves-effect waves-dark"
                   href="javascript:void(0)"
                 >
-                 <i class="fa-solid fa-magnifying-glass"></i>
+                 <i className="fa-solid fa-magnifying-glass"></i>
                 </a>
                 <form className="app-search position-absolute">
                   <input
@@ -135,7 +135,7 @@ const Header = () => {
                     placeholder="Search & enter"
                   />
                   <a className="srh-btn">
-                  <i class="fa-solid fa-bars"></i>
+                  <i className="fa-solid fa-bars"></i>
                   </a>
                 </form>
               </li>
