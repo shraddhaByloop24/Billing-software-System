@@ -302,3 +302,29 @@ button:active i {
       margin-top: 60px
   }
 }
+
+/* button */
+.btn-2 {
+  background: rgb(0, 0, 128) !important;
+  background: linear-gradient(0deg, rgb(0, 0, 128) 0%, rgba(0, 0, 128, 1) 100%) !important;
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  height: 45px;
+  width: 120px;
+}
+
+.btn-2:before {
+  height: 0%;
+  width: 2;
+}
+
+.btn-2:hover {
+  box-shadow: 4px 4px 6px 0 rgba(19, 17, 17, 0.5),
+      -4px -4px 6px 0 rgba(116, 125, 136, .5),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+      inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/* button end*/

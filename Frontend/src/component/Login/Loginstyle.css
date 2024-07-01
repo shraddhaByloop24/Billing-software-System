@@ -174,11 +174,12 @@ a:hover {
 
 }
 .wrapper {
-    min-height: 90.2vh;
+    min-height: 90.2vh !important;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
+
    
 }
 

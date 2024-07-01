@@ -14,13 +14,13 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://a339-2405-201-301d-f0d5-7984-d486-3b2d-c5d5.ngrok-free.app/api/signup', { 
-      username: name, 
-      password, 
-      email, 
-      mobileNo: mobile, 
-      role, 
-      address 
+    axios.post('https://a339-2405-201-301d-f0d5-7984-d486-3b2d-c5d5.ngrok-free.app/api/signup', {
+      username: name,
+      password,
+      email,
+      mobileNo: mobile,
+      role,
+      address
     })
       .then(result => {
         console.log(result);
@@ -38,16 +38,16 @@ const Signup = () => {
         }
       });
   };
-  
+
   return (
     <div className="wrapper shadow" >
-      <div className="container main-inner">
+      <div className="container main-inner p-2">
         <div className="inner">
           <div className="image-holder">
             <img src="/image/Untitled-3.png" height={520} alt="" />
           </div>
           <form onSubmit={handleSubmit}>
-            <h3>Registration Form</h3>
+            <h3>Registration </h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum impedit sapiente ipsam.</p>
             <div className="form-group">
               <input type="text" placeholder="Username" name="username" onChange={(e) => setName(e.target.value)} className="form-control" />
@@ -99,14 +99,14 @@ const Signup = () => {
               <i className="zmdi zmdi-account" />
             </div>
 
-            <div className="newAcc text-start">
-              <span>New on our platform? <Link to="/" className="unique">Back</Link></span>
-            </div>
-            
-            <button type="submit">
+
+            <button className='custom-btn btn-2 ' type="submit">
               Register
               <i className="zmdi zmdi-arrow-right" />
             </button>
+            <div className="newAcc text-start pt-3">
+              <span>New on our platform? <Link to="/" className="unique">Back</Link></span>
+            </div>
           </form>
         </div>
       </div>
