@@ -1,7 +1,27 @@
-import React from 'react'
-import Header from './dashboard/Header'
+import React, { useState, useEffect } from 'react';
+import Header from './dashboard/Header';
+import axios from 'axios';
+
 
 const Productlist = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://0b75-2405-201-301d-f0d5-908b-552e-3045-d644.ngrok-free.app/api/getproducts');
+        if (Array.isArray(response.data)) {
+          setProducts(response.data);
+        } else {
+          console.error('Error: response data is not an array');
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
      <div
@@ -43,46 +63,45 @@ const Productlist = () => {
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
-                    <h5 className="card-title mb-0">Static Table</h5>
+                    <h5 className="card-title mb-0">Product List Table</h5>
                   </div>
                   <table className="table">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Base Price</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Subcategory</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Quantity Available</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
+                      {Array.isArray(products) && products.map((product, index) => (
+                        <tr key={product._id}>
+                          <th scope="row">{index + 1}</th>
+                          <td>{product.itemname}</td>
+                          <td>{product.description}</td>
+                          <td>${product.baseprice}</td>
+                          <td>{product.category}</td>
+                          <td>{product.subcategory}</td>
+                          <td>{product.discount}</td>
+                          <td>{product.quantityavailable}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
+
                 <div className="card">
                   <div className="card-body">
                     <h5 className="card-title mb-0">
                       Static Table With Checkboxes
                     </h5>
                   </div>
-                  <div className="table-responsive">
+                 <div className="table-responsive">
                     <table className="table">
                       <thead className="thead-light">
                         <tr>
@@ -209,7 +228,7 @@ const Productlist = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className="card">
+                {/* <div className="card">
                   <div className="card-body">
                     <h5 className="card-title">Basic Datatable</h5>
                     <div className="table-responsive">
@@ -698,7 +717,7 @@ const Productlist = () => {
                       </table>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             {/* ============================================================== */}
@@ -719,3 +738,5 @@ const Productlist = () => {
 }
 
 export default Productlist
+
+

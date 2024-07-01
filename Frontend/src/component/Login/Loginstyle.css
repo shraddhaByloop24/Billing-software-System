@@ -168,13 +168,13 @@ a:hover {
 }
 
 .backk{
-    background-image:linear-gradient(to left, rgba(0, 0, 0, 0.296),rgba(51, 81, 155, 0.389)), url('icons/bg_1.jpg');
+background-image:linear-gradient(to left, rgba(0, 0, 0, 0.296),rgba(51, 81, 155, 0.389)), url('icons/bg_1.jpg') !important;
     background-size: 100%;
     /* overflow-y: hidden !important; */
 
 }
 .wrapper {
-    min-height: 90.2vh !important;
+    min-height: 91.5vh !important;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;

@@ -4,7 +4,7 @@ import './stylemin.css'
 import Header from '../../Layout/dashboard/Header';
 // import Addproducts from '../../Layout/Addproducts';
 // import Calculated from '../../Layout/Calculated';
-import Backbtn from './Backbtn';
+
 import Chart from './Chart';
 
 
@@ -23,7 +23,7 @@ const Dashboard = () => {
         data-boxed-layout="full"
       >
     <Header/>
-    <Backbtn />
+    
     <Chart/>
     {/* <Calculated/> */}
     </div>

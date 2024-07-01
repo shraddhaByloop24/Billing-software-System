@@ -40,7 +40,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="wrapper shadow" >
+    <div className="wrapper pt-4" >
       <div className="container main-inner p-2">
         <div className="inner">
           <div className="image-holder">

@@ -32,7 +32,7 @@ function Login() {
   return (
     <>
     <div className="container-fluid backk">
-        <h1 className='text-start pt-4 text-white px-5'>SBS Logo </h1>
+        <h1 className='text-start pt-3 text-white px-5'>Logo </h1>
         {/* <img src="icons/Byloop.png" className='img-fluid p-0 mx-3 bg-dark' width={150} alt="" /> */}
       <div className="wrapper " >
         <div className="container main-inner  p-3">

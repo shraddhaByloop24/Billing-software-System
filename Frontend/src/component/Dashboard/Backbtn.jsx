@@ -1,32 +1,41 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import './Chart.css'
+
 const Backbtn = () => {
   return (
-    <>
-      <div class="page-wrapper p-2 pb-4">
-        <div class="page-breadcrumb">
-          <div class="row">
-            <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Dashboard</h4>
-              <div class="ms-auto text-end">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <Link to="/Dashboard">
-                        Home  <i className="fa-solid fa-chevron-right"></i>
-                      </Link>
-                    </li>
-                    <li class="breadcrumb-item ">
-                      Library
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+  <>
+  
+<section>
+  <div class="container">
+    <ul class="card calculation-cards">
+      <li>
+        <p>
+          <h3>53</h3><i class="fa fa-arrow-up clr-up"></i>
+        </p>
+        <span>Websites Added</span>
+      </li>
+      <li>
+          <p>
+            <h3>18</h3><i class="fa fa-arrow-down clr-down"></i>
+          </p>
+          <span>Websites Dropped</span>
+        </li>
+      <li>
+        <p>
+          <h3>9,526</h3><i class="fa fa-arrow-top"></i>
+        </p>
+        <span>Current Websites</span>
+      </li>
+      <li>
+        <p>
+          <h3>6.90%</h3><i class="fa fa-arrow-top"></i>
+        </p>
+        <span>Market Share</span>
+      </li>
+    </ul>
+  </div>
+</section>
+  </>
   )
 }
 

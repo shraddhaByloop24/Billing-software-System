@@ -55,11 +55,13 @@ a:hover {
 }
 
 .wrapper {
-  min-height: 100vh;
+  min-height: 100vh !important;
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
+  /* padding-bottom: 10px; */
+  /* background-color: #333; */
   /* background-image: url('image/registration-form-1.jpg');
   background-size: cover; */
 }
