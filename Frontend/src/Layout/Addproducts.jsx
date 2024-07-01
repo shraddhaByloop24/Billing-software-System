@@ -108,7 +108,7 @@ const Addproducts = () => {
               <div className="row p-3">
                 <div className="col-lg-8">
                   <form onSubmit={handleSubmit}>
-                    {/* <h2 className='heading'>Create New Product</h2> */}
+                    <h2 className='heading pb-3'>Create New Product</h2>
                     <div className="row">
                       <label className='w-100 col-lg-6'>
                         Item Name:

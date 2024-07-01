@@ -70,12 +70,14 @@ const Productlist = () => {
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Item Name</th>
-                        <th scope="col">Description</th>
                         <th scope="col">Base Price</th>
                         <th scope="col">Category</th>
                         <th scope="col">Subcategory</th>
                         <th scope="col">Discount</th>
                         <th scope="col">Quantity Available</th>
+                        <th scope="col">Image</th>
+                        <th scope='col'>cuisine</th>
+                        <th scope="col">Description</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -89,6 +91,8 @@ const Productlist = () => {
                           <td>{product.subcategory}</td>
                           <td>{product.discount}</td>
                           <td>{product.quantityavailable}</td>
+                          <td>{product.image}</td>
+                          <td>{product.cuisine}</td>
                         </tr>
                       ))}
                     </tbody>

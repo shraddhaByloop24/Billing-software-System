@@ -38,11 +38,14 @@ const Chart = () => {
               </div>
             </div>
           </div>
+
+          
         </div>
       </div>
       <div class="page-wrapper p-2 pb-4 bg-white">
         <div class="page-breadcrumb">
-          <div className='d-flex justify-content-center align-items-center row'>
+        <Backbtn/>
+          <div className='d-flex justify-content-center align-items-center row mt-4'>
             <div className="col-lg-6">
               <div className="card w-100 ">
                 <div className="card-header">
