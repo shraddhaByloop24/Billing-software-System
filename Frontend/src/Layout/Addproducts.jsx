@@ -53,7 +53,7 @@ const Addproducts = () => {
       formData.append('foodtype', foodtype);
       formData.append('customizations', JSON.stringify(customizations));
       formData.append('filters', JSON.stringify(filters));
-      const response = await axios.post('https://0b75-2405-201-301d-f0d5-908b-552e-3045-d644.ngrok-free.app/api/products', formData, {
+      const response = await axios.post('https://eafb-2405-201-301d-f872-a5f7-bfbe-80a9-e3f9.ngrok-free.app/api/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -256,7 +256,7 @@ const Addproducts = () => {
                         ))}
                       </div>
                     ))}
-                    <button type="button" className="custom btn-2 " onClick={handleAddCustomization}> Customization</button>
+                    <button type="button" className="custom btn-2 " onClick={handleAddCustomization}> Add </button>
                     <br />
                     <div className="row mt-3">
                       <label className="w-100 col-lg-6">
@@ -292,7 +292,7 @@ const Addproducts = () => {
                 </div>
                 <div className="col-lg-4">
                   <div className='shadow'>
-                    <img src="image/30727.jpg" height={520} alt="" />
+                    <img src="image/register.png"  alt="" />
                   </div>
                   <div className='mt-3 shadow p-3'>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque alias laboriosam quos aliquid neque repudiandae odit, sunt expedita excepturi nesciunt, nam modi enim? Cupiditate optio ducimus excepturi quos saepe. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente maxime quo molestias voluptatibus iste perferendis consectetur tenetur consequatur quas, possimus beatae quisquam debitis facilis unde mollitia! Quas et dolor maiores!</p>
