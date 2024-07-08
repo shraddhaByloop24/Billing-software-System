@@ -5,6 +5,7 @@ import Editmenu from './Editmenu';
 // import Editmenu from './Editmenu';
 
 const Productlist = () => {
+  const [id, setId] = useState('');
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   
@@ -12,12 +13,12 @@ const Productlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://d6e7-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/getproducts', 
+        const response = await axios.get('https://8c92-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/getproducts', 
           {
             headers: {
               'ngrok-skip-browser-warning': '69420'
             }
-          });
+          })
         setProducts(response.data.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -30,6 +31,21 @@ const Productlist = () => {
     setSelectedProduct(product);
   };
 
+// Delete Product 
+const handleDeleteClick = async (productId) => {
+  try {
+    await axios.delete(`https://8c92-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/products/${productId}`, 
+      {
+        headers: {
+          'ngrok-skip-browser-warning': '69420'
+        }
+      });
+    
+    setProducts(products.filter(product => product._id !== productId));
+  } catch (error) {
+    console.error('Error deleting product:', error);
+  }
+};
 
 
 
@@ -93,7 +109,7 @@ const Productlist = () => {
                     <tbody>
                       {Array.isArray(products) && products.map((product, index) => (
                         <tr key={product._id}>
-                          <th scope="row">{index + 1}</th>
+                          <th scope="row">{index + 1} </th>
                           <td>{product.itemname}</td>
                           <td>${product.baseprice}</td>
                           <td>{product.category}</td>
@@ -119,7 +135,9 @@ const Productlist = () => {
                               data-bs-target="#staticBackdrop"
                               onClick={() => handleEditClick(product)}
                             ></i>
-                            <i className="fa-solid fa-trash-can btn btn-danger mx-1 shadow"></i>
+                            <i className="fa-solid fa-trash-can btn btn-danger mx-1 shadow"
+                             onClick={() => handleDeleteClick(product._id)}
+                             ></i>
                           </td>
                         </tr>
                       ))}
