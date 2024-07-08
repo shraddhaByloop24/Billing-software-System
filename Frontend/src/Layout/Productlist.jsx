@@ -2,19 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Header from './dashboard/Header';
 import axios from 'axios';
 import Editmenu from './Editmenu';
+// import Editmenu from './Editmenu';
 
 const Productlist = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [formData, setFormData] = useState({
-    itemname: '',
-    baseprice: 0,
-  });
-
+  
+  // Add Product
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://eafb-2405-201-301d-f872-a5f7-bfbe-80a9-e3f9.ngrok-free.app/api/getproducts',
+        const response = await axios.get('https://d6e7-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/getproducts', 
           {
             headers: {
               'ngrok-skip-browser-warning': '69420'
@@ -30,47 +28,10 @@ const Productlist = () => {
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
-    setFormData({
-      itemname: product.itemname,
-      baseprice: product.baseprice,
-    });
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(
-        `https://eafb-2405-201-301d-f872-a5f7-bfbe-80a9-e3f9.ngrok-free.app/api/products/:id`,
-        formData,
-        {
-          headers: {
-            'ngrok-skip-browser-warning': '69420'
-          }
-        }
-      );
-      console.log('Product updated:', response.data);
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product._id === selectedProduct._id ? response.data : product
-        )
-      );
-      setSelectedProduct(null);
-      setFormData({
-        itemname: '',
-        baseprice: 0,
-      });
-    } catch (error) {
-      console.error('Error updating product:', error);
-    }
-  };
+
 
   return (
     <>
@@ -167,6 +128,7 @@ const Productlist = () => {
                 </div>
               </div>
 
+              {/* Modal body Start */}
               <div
                 className="modal fade"
                 id="staticBackdrop"
@@ -190,123 +152,7 @@ const Productlist = () => {
                       />
                     </div>
                     <div className="modal-body">
-                      <form onSubmit={handleFormSubmit}>
-                        <div className="row">
-                          <label className='w-100 col-lg-6'>
-                            Item Name:
-                            <input
-                              className="form-control border"
-                              type="text"
-                              name="itemname"
-                              value={formData.itemname}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                          <br />
-                          <label className='w-100 col-lg-6'>
-                            Base Price:
-                            <input
-                              className="form-control border"
-                              type="number"
-                              name="baseprice"
-                              value={formData.baseprice}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                        </div>
-                        <div className="row">
-                          <label className='w-100 col-lg-6'>
-                          category
-                            <input
-                              className="form-control border"
-                              type="text"
-                              name="category"
-                              value={formData.category}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                          <br />
-                          <label className='w-100 col-lg-6'>
-                            Subcategory
-                            <input
-                              className="form-control border"
-                              type="text"
-                              name="baseprice"
-                              value={formData.subcategory}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                        </div>
-                        <div className="row">
-                          <label className='w-100 col-lg-6'>
-                          Quantityavailable
-                            <input
-                              className="form-control border"
-                              type="text"
-                              name="quantityavailable"
-                              value={formData.quantityavailable}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                          <br />
-                          <label className='w-100 col-lg-6'>
-                            Subcategory
-                            <input
-                              className="form-control border"
-                              type="file"
-                              name="image"
-                              value={formData.image}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                        </div>
-                        <div className="row">
-                          <label className='w-100 col-lg-6'>
-                           Cuisine
-                            <input
-                              className="form-control border"
-                              type="text"
-                              name="quantityavailable"
-                              value={formData.cuisine}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                          <br />
-                          <label className='w-100 col-lg-6'>
-                          Foodtype
-                            <input
-                              className="form-control border"
-                              type="text"
-                              name="foodtype"
-                              value={formData.foodtype}
-                              onChange={handleInputChange}
-                              required
-                            />
-                          </label>
-                        </div>
-
-
-
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button type="submit" className="btn btn-primary">
-                            Save changes
-                          </button>
-                        </div>
-                      </form>
+                     <Editmenu product={selectedProduct}/>
                     </div>
                   </div>
                 </div>

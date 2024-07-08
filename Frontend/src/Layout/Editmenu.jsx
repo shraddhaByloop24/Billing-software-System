@@ -1,119 +1,209 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import './style.css'
+const Editmenu = () => {
+  const [id, setId] = useState('');
+  const [itemname, setItemname] = useState('');
+  const [description, setDescription] = useState('');
+  const [baseprice, setBaseprice] = useState('');
+  const [category, setCategory] = useState('');
+  const [subcategory, setSubcategory] = useState('');
+  const [discount, setDiscount] = useState('');
+  const [quantityavailable, setQuantityavailable] = useState('');
+  const [cuisine, setCuisine] = useState('');
+  const [foodtype, setFoodtype] = useState('');
+  const [customizations, setCustomizations] = useState('');
+  const [filters, setFilters] = useState('');
+  const [image, setImage] = useState(null);
 
-const Editmenu = ({ food, fetchFoods }) => {
-
-  const [editedFood, setEditedFood] = useState(food);
-  const handleUpdate = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('itemname', itemname);
+    formData.append('description', description);
+    formData.append('baseprice', baseprice);
+    formData.append('category', category);
+    formData.append('subcategory', subcategory);
+    formData.append('discount', discount);
+    formData.append('quantityavailable', quantityavailable);
+    formData.append('cuisine', cuisine);
+    formData.append('foodtype', foodtype);
+    formData.append('customizations', customizations);
+    formData.append('filters', filters);
+    if (image) {
+      formData.append('image', image);
+    }
     try {
-      await axios.put(`http://localhost:3000/food/${editedFood._id}`, editedFood);
-      console.log('Food item updated successfully:', editedFood);
-
-      fetchFoods();
-
-      setEditMode(false);
-      setEditedFood({
-        name: '',
-        price: '',
-        description: '',
-        foodtype: '',
-        foodcategory: '',
-        subcategorys: '',
-        discount: '',
-        foodimg: ''
+      const response = await axios.put(`https://d6e7-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/products/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+      console.log(response.data);
+      // Handle success response
     } catch (error) {
-      console.error('Error updating food item:', error);
+      console.error(error);
+      // Handle error response
     }
   };
 
-
-
-
-  // AddFood Data Sow in the list
-
-  useEffect(() => {
-    fetchFoodList();
-  }, []);
-
-  const fetchFoodList = async () => {
-    try {
-      const responses = await axios.get('http://localhost:3001/addfood');
-      setFoodList(responses.data);
-    } catch (error) {
-      console.error('Error fetching food items:', error);
-    }
-  };
 
 
   return (
     <div>
       <h6>Edit Food</h6>
-      <form className='editforms p-0'>
-        <div className='p-0'>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            value={editedFood.name}
-            onChange={(e) => setEditedFood({ ...editedFood, name: e.target.value })}
-          />
-        </div>
-        <div>
-          <label htmlFor="price">Price:</label>
-          <input
-            type="number"
-            id="price"
-            value={editedFood.price}
-            onChange={(e) => setEditedFood({ ...editedFood, price: e.target.value })}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description" className='form-control is-invalid'
-            value={editedFood.description}
-            onChange={(e) => setEditedFood({ ...editedFood, description: e.target.value })}
-          />
-        </div>
-        <div>
-          <label htmlFor="foodtype">Food Type:</label>
+      <form onSubmit={handleSubmit}>
 
-          <select name="foodtype" id="foodtype" value={editedFood.foodtype} onChange={(e) => setEditedFood({ ...editedFood, foodtype: e.target.value })} >
-            <option value=" "></option>
-            <option value="veg">Veg</option>
-            <option value="nonVeg">Non-Veg</option>
-          </select>
+        <div className="row">
+          <label className='w-100 col-lg-6'>
+            Id
+            <input
+              className="form-control border"
+              type="text"
+              name="id"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+            />
+          </label>
+          <label className='w-100 col-lg-6'>
+            Item Name:
+            <input
+              className="form-control border"
+              type="text"
+              name="itemname"
+              value={itemname}
+              onChange={(e) => setItemname(e.target.value)}
+            />
+          </label>
+          </div>
+          
+          <div className="row">
+          <label className='w-100 col-lg-6'>
+            Base Price:
+            <input
+              className="form-control border"
+              type="number"
+              name="baseprice"
+              value={baseprice}
+              onChange={(e) => setBaseprice(e.target.value)}
+
+              required
+            />
+          </label>
+          <label className='w-100 col-lg-6'>
+            category
+            <input
+              className="form-control border"
+              type="text"
+              name="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+
+            />
+          </label>
         </div>
-        <div >
-          <label htmlFor="foodcategory">Food Category:</label>
-          <select
-            // className="input-text form-select"
-            name="foodcategory"
-            id="foodcategory"
-            value={editedFood.foodcategory}
-            onChange={(e) => setEditedFood({ ...editedFood, foodcategory: e.target.value })}
+
+        <div className="row">
+          <label className='w-100 col-lg-6'>
+            Subcategory
+            <input
+              className="form-control border"
+              type="text"
+              name="subcategory"
+              value={subcategory}
+              onChange={(e) => setSubcategory(e.target.value)}
+              required
+            />
+          </label>
+          <label className='w-100 col-lg-6'>
+            Discount
+            <input
+              className="form-control border"
+              type="number"
+              name="discount"
+              value={discount}
+              onChange={(e) => setDiscount(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div className="row">
+          <label className='w-100 col-lg-6'>
+            Quantityavailable
+            <input
+              className="form-control border"
+              type="number"
+              name="quantityavailable"
+              value={quantityavailable}
+              onChange={(e) => setQuantityavailable(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label className='w-100 col-lg-6'>
+            Subcategory
+            <input
+              className="form-control border"
+              type="file"
+              name="image"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div className="row">
+          <label className='w-100 col-lg-6'>
+            Cuisine
+            <input
+              className="form-control border"
+              type="text"
+              name="cuisine"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label className='w-100 col-lg-6'>
+            Foodtype
+            <input
+              className="form-control border"
+              type="text"
+              name="foodtype"
+              value={foodtype}
+              onChange={(e) => setFoodtype(e.target.value)}
+              required
+            />
+          </label>
+
+          <label className='w-100 col-lg-6'>
+            Description
+            <input
+              className="form-control border"
+              type="text"
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+
+
+
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            data-bs-dismiss="modal"
           >
-            <option value="">Select Food Category</option>
-            {foodList.map(food => (
-              <option key={food._id} value={food.foodname}>
-                {food.foodname}
-              </option>
-            ))}
-          </select>
+            Close
+          </button>
+          <button type="submit" className="btn btn-primary">
+            Save changes
+          </button>
         </div>
-        <div>
-          <input
-            type="text"
-            name='subcategorys'
-            id="subcategorys"
-            value={editedFood.subcategorys}
-            onChange={(e) => setEditedFood({ ...editedFood, subcategorys: e.target.value })}
-          />
-        </div>
-        <button type="button" onClick={handleUpdate}>Update</button>
+
       </form>
     </div>
   )

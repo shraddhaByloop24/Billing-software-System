@@ -53,7 +53,7 @@ const Addproducts = () => {
       formData.append('foodtype', foodtype);
       formData.append('customizations', JSON.stringify(customizations));
       formData.append('filters', JSON.stringify(filters));
-      const response = await axios.post('https://eafb-2405-201-301d-f872-a5f7-bfbe-80a9-e3f9.ngrok-free.app/api/products', formData, {
+      const response = await axios.post('https://d6e7-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

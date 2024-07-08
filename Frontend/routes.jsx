@@ -6,6 +6,7 @@ import Productlist from './src/Layout/Productlist';
 // import Editmenu from './src/Layout/Editmenu';
 // import Addfood from './src/Layout/Addfood';
 import Login from './src/component/Login/Login';
+import Editmenu from './src/Layout/Editmenu';
 // import Demofood from './src/Layout/Demofood';
 // import BurgerPage from './src/Layout/BurgerPage';
 // import Newdashboard from './src/Layout/Newdashboard';
@@ -32,10 +33,10 @@ export const routes = [
     path: '/Productlist',
     element: <Productlist />,
   },
-  // {
-  //   path: '/Foodlist',
-  //   element: <Foodlist />,
-  // },
+  {
+    path: '/updateproduct',
+    element: <Editmenu/>
+  },
   // {
   //   path: '/edit',
   //   element: <Editmenu />,
