@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Foodlist = ({ foods }) => {
+const Foodlist = ({ products }) => {
   return (
     <div>
       <h1>Food Items</h1>
       <ul>
-        {foods.map((food, index) => (
+        {products.map((product, index) => (
           <li key={food._id}>
-            {index + 1}. {food.name} - ${food.price}
+            {index + 1}. {products.itemname} - ${food.baseprice}
           </li>
         ))}
       </ul>

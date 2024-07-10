@@ -417,14 +417,14 @@ const Header = () => {
                 </Link>
               </li>
               <li className="sidebar-item px-2">
-                <a
+                <Link to='/payment'
                   className="sidebar-link waves-effect waves-dark sidebar-link"
                   href="tables.html"
                   aria-expanded="false"
                 >
                   <img src="icons/wallet_8015936.png" className='img-fluid' width={25} alt="" />
                   <span className="hide-menu px-2">Payment</span>
-                </a>
+                </Link>
               </li>
               <li className="sidebar-item">
                 <a

@@ -12,3 +12,57 @@ color:  rgb(0, 0, 128);
 .custom{
     width: 150px !important;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.payment-card {
+  max-width: 173px;
+  height: 110px;
+  background: #fff;
+  /* margin: 30px 10px; */
+  padding:20px 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 200px rgba(0, 0, 0, 0.5);
+  transition: 0.5s ease-in-out;
+}
+
+.payment-card:hover {
+  height: 300px;
+}
+
+.payment-card:hover .content {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+.payment-card .image-wrapper {
+  position: relative;
+  width: 130px;
+  height: 100px;
+  top: -60px;
+  z-index: 1;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.payment-card .image-wrapper img {
+    width: 130px;
+  height: 130px;
+  border-radius: 4px;
+}
+
+.payment-card .content {
+  left: -10px;
+  top: 8%;
+  position: relative;
+  width: 150px;
+  color: #111;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+}
+.d-block{
+    height: 600px;
+}

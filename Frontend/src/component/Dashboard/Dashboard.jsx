@@ -23,9 +23,8 @@ const Dashboard = () => {
         data-boxed-layout="full"
       >
     <Header/>
-    
     <Chart/>
-    {/* <Calculated/> */}
+    
     </div>
     </>
   );

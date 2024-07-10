@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Header from './dashboard/Header';
 import axios from 'axios';
 import Editmenu from './Editmenu';
-// import Editmenu from './Editmenu';
 
 const Productlist = () => {
   const [id, setId] = useState('');
   const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
-  
+
   // Add Product
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://8c92-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/getproducts', 
+        const response = await axios.get('https://7462-2405-201-301d-f871-bdf1-d128-4cf7-e4f4.ngrok-free.app/api/getproducts', 
           {
             headers: {
               'ngrok-skip-browser-warning': '69420'
@@ -31,23 +31,26 @@ const Productlist = () => {
     setSelectedProduct(product);
   };
 
-// Delete Product 
-const handleDeleteClick = async (productId) => {
-  try {
-    await axios.delete(`https://8c92-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/products/${productId}`, 
-      {
-        headers: {
-          'ngrok-skip-browser-warning': '69420'
-        }
-      });
-    
-    setProducts(products.filter(product => product._id !== productId));
-  } catch (error) {
-    console.error('Error deleting product:', error);
-  }
-};
+  // Delete Product 
+  const handleDeleteClick = async (productId) => {
+    try {
+      await axios.delete(`https://7462-2405-201-301d-f871-bdf1-d128-4cf7-e4f4.ngrok-free.app/api/products/${productId}`, 
+        {
+          headers: {
+            'ngrok-skip-browser-warning': '69420'
+          }
+        });
+      
+      setProducts(products.filter(product => product._id !== productId));
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
 
-
+  // Filtered products based on search query
+  const filteredProducts = products.filter(product => 
+    product.itemname.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
@@ -87,6 +90,13 @@ const handleDeleteClick = async (productId) => {
                 <div className="card">
                   <div className="card-body">
                     <h1 className="card-title heading mb-0">Product List Table</h1>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search by item name"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                   </div>
                   <table className="table">
                     <thead>
@@ -107,7 +117,7 @@ const handleDeleteClick = async (productId) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {Array.isArray(products) && products.map((product, index) => (
+                      {Array.isArray(filteredProducts) && filteredProducts.map((product, index) => (
                         <tr key={product._id}>
                           <th scope="row">{index + 1} </th>
                           <td>{product.itemname}</td>

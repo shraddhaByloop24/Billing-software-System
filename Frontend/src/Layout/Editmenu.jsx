@@ -14,7 +14,6 @@ const Editmenu = () => {
   const [customizations, setCustomizations] = useState('');
   const [filters, setFilters] = useState('');
   const [image, setImage] = useState(null);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -33,7 +32,7 @@ const Editmenu = () => {
       formData.append('image', image);
     }
     try {
-      const response = await axios.put(`https://d6e7-2405-201-301d-f872-794d-acaa-e3ff-b6e8.ngrok-free.app/api/products/${id}`, formData, {
+      const response = await axios.put(`https://cb05-2405-201-301d-f871-95e9-8d7e-6542-3445.ngrok-free.app/api/products/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
