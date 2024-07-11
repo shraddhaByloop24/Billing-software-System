@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Header from './dashboard/Header';
-import './Style.css'
+import './Style.css';
 import Swal from 'sweetalert2';
 
 const Addproducts = () => {
-  
   const [itemname, setItemname] = useState('');
   const [description, setDescription] = useState('');
   const [baseprice, setBaseprice] = useState(0);
@@ -54,24 +53,34 @@ const Addproducts = () => {
       formData.append('foodtype', foodtype);
       formData.append('customizations', JSON.stringify(customizations));
       formData.append('filters', JSON.stringify(filters));
-      const response = await axios.post('https://7462-2405-201-301d-f871-bdf1-d128-4cf7-e4f4.ngrok-free.app/api/products', formData, {
+      const response = await axios.post('https://edc6-49-43-1-114.ngrok-free.app/api/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
       if (response.status === 200) {
-        alert('Product addition successfully.');
-
+        Swal.fire({
+          icon: 'success',
+          title: 'Product added successfully',
+          text: 'Your product has been added.',
+        });
       } else {
-        alert('Product addition failed. Please check your input and try again.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Product addition failed',
+          text: 'Please check your input and try again.',
+        });
       }
     } catch (error) {
       console.error('Error adding product:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred while adding the product.',
+      });
     }
-  }
-
-
+  };
 
   return (
     <div
@@ -182,7 +191,7 @@ const Addproducts = () => {
                           onChange={(event) => setQuantityavailable(event.target.value)}
                         />
                       </label>
-                    </div>  
+                    </div>
                     <br />
                     <div className="row">
                       <label className="w-100 col-lg-6">
@@ -205,7 +214,7 @@ const Addproducts = () => {
                       </label>
                     </div>
                     <br />
-                    
+
                     <label className="w-100">
                       Food Type:
                       <input
@@ -218,7 +227,6 @@ const Addproducts = () => {
                     <br />
                     {customizations.map((customization, index) => (
                       <div key={index}>
-                        
                         <label className="w-100">
                           Customization Type:
                           <input
@@ -260,7 +268,7 @@ const Addproducts = () => {
                         ))}
                       </div>
                     ))}
-                    <button type="button" className="custom btn-2 " onClick={handleAddCustomization}> Add </button>
+                    <button type="button" className="custom btn-2" onClick={handleAddCustomization}>Add</button>
                     <br />
                     <div className="row mt-3">
                       <label className="w-100 col-lg-6">
@@ -296,11 +304,11 @@ const Addproducts = () => {
                 </div>
                 <div className="col-lg-4">
                   <div className='shadow'>
-                    <img src="image/register.png"  alt="" />
+                    <img src="image/register.png" alt="" />
                   </div>
                   <div className='mt-3 shadow p-3'>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque alias laboriosam quos aliquid neque repudiandae odit, sunt expedita excepturi nesciunt, nam modi enim? Cupiditate optio ducimus excepturi quos saepe. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente maxime quo molestias voluptatibus iste perferendis consectetur tenetur consequatur quas, possimus beatae quisquam debitis facilis unde mollitia! Quas et dolor maiores!</p>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -308,7 +316,6 @@ const Addproducts = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

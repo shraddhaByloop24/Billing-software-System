@@ -54,7 +54,7 @@ const Chart = () => {
                 <div className="col-lg-2">
                   <div className='d-flex justify-content-center align-items-center '>
                     <button class="custom-btn btn-13 mt-3">
-                      <Link to='/payment' className='text-white'>Generate Bill</Link>
+                      <Link to='/payment' className='text-white'>Go to Bill</Link>
                     </button>
 
                   </div>
@@ -63,7 +63,7 @@ const Chart = () => {
             </div>
             <Backbtn />
 
-            <div className='d-flex justify-content-center align-items-center row mt-4'>
+            {/* <div className='d-flex justify-content-center align-items-center row mt-4'>
               <div className="col-lg-6">
                 <div className="card w-100 ">
                   <div className="card-header">
@@ -262,7 +262,7 @@ const Chart = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

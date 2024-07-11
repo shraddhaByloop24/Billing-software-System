@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Header from './dashboard/Header';
+import Header from '../dashboard/Header';
 import axios from 'axios';
+import './payment.css';
+
 
 const Payment = () => {
     const [products, setProducts] = useState([]);
@@ -10,7 +12,7 @@ const Payment = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://77b5-2405-201-301d-f871-bdf1-d128-4cf7-e4f4.ngrok-free.app/api/getproducts', {
+                const response = await axios.get('https://edc6-49-43-1-114.ngrok-free.app/api/getproducts', {
                     headers: {
                         'ngrok-skip-browser-warning': '69420'
                     }
@@ -23,41 +25,41 @@ const Payment = () => {
         fetchData();
     }, []);
 
-    const handleAddProduct = async (productId) => {
-        const product = products.find(prod => prod._id === productId);
-        if (!product) {
-            console.error('Product not found');
-            return;
+    const handleAddProduct = (product) => {
+        const existingProductIndex = addorder.findIndex(item => item._id === product._id);
+        let updatedOrder;
+        if (existingProductIndex >= 0) {
+            updatedOrder = [...addorder];
+            updatedOrder[existingProductIndex].quantity += 1;
+        } else {
+            updatedOrder = [...addorder, { ...product, quantity: 1 }];
         }
+        setAddorder(updatedOrder);
+        console.log(updatedOrder);
+        setTotalAmount(totalAmount + parseFloat(product.baseprice));
+    };
 
-        const quantity = 1; 
-        const baseprice = product.baseprice;
-        try {
-            const response = await axios.post('https://77b5-2405-201-301d-f871-bdf1-d128-4cf7-e4f4.ngrok-free.app/api/createorder', {
-                items: [{ 
-                    product_id: productId,
-                    quantity
-                }]
-            }, {
-                headers: {
-                    'ngrok-skip-browser-warning': '69420'
-                }
-            });
-            
-            const order = response.data.order;
-            const newAddorder = [...addorder, ...order.items];
-            setAddorder(newAddorder);
-            setTotalAmount(totalAmount + (product.baseprice * quantity));
-        } catch (error) {
-            console.error('Error adding product:', error);
+    const increment = (index) => {
+        const updatedOrder = [...addorder];
+        updatedOrder[index].quantity += 1;
+        setAddorder(updatedOrder);
+        setTotalAmount(totalAmount + parseFloat(updatedOrder[index].baseprice));
+    };
+
+    const decrement = (index) => {
+        const updatedOrder = [...addorder];
+        if (updatedOrder[index].quantity > 1) {
+            updatedOrder[index].quantity -= 1;
+            setAddorder(updatedOrder);
+            setTotalAmount(totalAmount - parseFloat(updatedOrder[index].baseprice));
         }
     };
 
-    const handleDeleteProduct = (index) => {
-        const updatedOrder = [...addorder];
-        const removedItem = updatedOrder.splice(index, 1)[0];
+    const handleDeleteOrder = (id, index) => {
+        const updatedOrder = addorder.filter((item, idx) => idx !== index);
+        const deletedProduct = addorder[index];
         setAddorder(updatedOrder);
-        setTotalAmount(totalAmount - (removedItem.baseprice * removedItem.quantity));
+        setTotalAmount(totalAmount - (deletedProduct.baseprice * deletedProduct.quantity));
     };
 
     return (
@@ -78,7 +80,7 @@ const Payment = () => {
                             <div className="col-lg-6">
                                 <div className="row">
                                     {Array.isArray(products) && products.map((product) => (
-                                        <div className="col-lg-4" key={product._id}>
+                                        <div className="col-lg-4 my-5" key={product._id}>
                                             <div className="payment-card">
                                                 <div className="image-wrapper">
                                                     <img alt="traveller" src={product.image} />
@@ -88,10 +90,11 @@ const Payment = () => {
                                                         <p><b>Baseprice:</b> {product.baseprice}</p>
                                                         <p><b className="bolder">Description:</b> {product.description}</p>
                                                         <div className="text-center">
-                                                            <button className="custom-btn btn-13 mt-3" onClick={() => handleAddProduct(product._id)}>Add</button>
+                                                            <button className="custom-btn btn-13 mt-3" onClick={() => handleAddProduct(product)}>Add</button>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     ))}
@@ -102,7 +105,7 @@ const Payment = () => {
                                     <h5 className="pt-2 bg-light p-3">Billing here</h5>
                                     <table className="table">
                                         <thead>
-                                            <tr>
+                                            <tr className=''>
                                                 <th scope="col">S no</th>
                                                 <th scope="col">Itemname</th>
                                                 <th scope="col">Amount</th>
@@ -115,21 +118,41 @@ const Payment = () => {
                                             {addorder.map((item, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>
-                                                    <td>{item.productname}</td>
-                                                    <td>{item.baseprice}</td>
-                                                    <td>{item.quantity}</td>
-                                                    <td>{item.baseprice * item.quantity}</td>
                                                     <td>
-                                                       <i className="fa-solid fa-trash text-danger" onClick={() => handleDeleteProduct(index)}></i>
+                                                        <input type="text" className='border-none'
+                                                            value={item.itemname}
+                                                        />
+                                                    </td>
+                                                    <td><input type="text" className='border-none' value={item.baseprice} /></td>
+                                                    <td>
+                                                        <i className="fa-solid fa-minus p-2 bg-danger text-white mx-1" onClick={() => decrement(index)}></i>
+                                                        <input type="text" className='border-none text-center' value={item.quantity}
+
+                                                        />
+                                                        <i className="fa-solid fa-plus p-2  bg-danger text-white" onClick={() => increment(index)}></i>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" className='border-none text-center'
+                                                            value={item.baseprice * item.quantity} /></td>
+                                                    <td>
+                                                        <i className="fa-solid fa-trash text-danger" onClick={() => handleDeleteOrder(item._id, index)}></i>
                                                     </td>
                                                 </tr>
                                             ))}
                                             <tr>
                                                 <th scope="row" colSpan="4">Total</th>
-                                                <td>{totalAmount}</td>
+                                                <td>
+                                                    <input type="text" className='border-none text-center'
+                                                    value={totalAmount} />
+                                                </td>
+
                                             </tr>
+
                                         </tbody>
                                     </table>
+                                    <div className='text-right mx-3'> 
+                                        <button className="btn custom-btn btn-13 px-2">Generate Bill</button>
+                                    </div>                              
                                 </div>
                             </div>
                         </div>
