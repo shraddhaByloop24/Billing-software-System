@@ -61,6 +61,23 @@ const Payment = () => {
         setAddorder(updatedOrder);
         setTotalAmount(totalAmount - (deletedProduct.baseprice * deletedProduct.quantity));
     };
+    const handleGenerateBill = () => {
+        const tableData = addorder.map((item) => ({
+            product_id: item._id,
+            itemname: item.itemname,
+            amount: item.baseprice,
+            quantity: item.quantity,
+            total: item.baseprice * item.quantity,
+        }));
+
+        axios.post('https://edc6-49-43-1-114.ngrok-free.app/api/createorder', { items: tableData })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
 
     return (
         <>
@@ -143,16 +160,16 @@ const Payment = () => {
                                                 <th scope="row" colSpan="4">Total</th>
                                                 <td>
                                                     <input type="text" className='border-none text-center'
-                                                    value={totalAmount} />
+                                                     value={totalAmount} />
                                                 </td>
 
                                             </tr>
 
                                         </tbody>
                                     </table>
-                                    <div className='text-right mx-3'> 
-                                        <button className="btn custom-btn btn-13 px-2">Generate Bill</button>
-                                    </div>                              
+                                    <div className='text-right mx-3'>
+                                        <button className="btn custom-btn btn-13 px-2" onClick={handleGenerateBill}>Generate Bill</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
