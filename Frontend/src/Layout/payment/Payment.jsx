@@ -98,15 +98,16 @@ const Payment = () => {
                                 <div className="row">
                                     {Array.isArray(products) && products.map((product) => (
                                         <div className="col-lg-4 my-5" key={product._id}>
-                                            <div className="payment-card">
-                                                <div className="image-wrapper">
+                                            <div className="payment-card pb-0">
+                                                <div className="image-wrapper text-white ">
                                                     <img alt="traveller" src={product.image} />
                                                     <div className="content">
-                                                        <p>Id: {product._id}</p>
-                                                        <p><b>Name:</b> {product.itemname}</p>
-                                                        <p><b>Baseprice:</b> {product.baseprice}</p>
-                                                        <p><b className="bolder">Description:</b> {product.description}</p>
-                                                        <div className="text-center">
+                                                        {/* <p>Id: {product._id}</p> */}
+                                                        <p className='text-white'><b> Name:</b>  {product.itemname}</p>
+                                                        <p className=' text-white'><b>Baseprice:</b> {product.baseprice}</p>
+                                                        <p className=' text-white'><b>Discount:</b> {product.discount}%</p>
+                                                        <p className=' text-white'><b className="bolder">Description:</b> {product.description}</p>
+                                                        <div className="text-center ">
                                                             <button className="custom-btn btn-13 mt-3" onClick={() => handleAddProduct(product)}>Add</button>
                                                         </div>
                                                     </div>
