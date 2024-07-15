@@ -53,7 +53,7 @@ const Addproducts = () => {
       formData.append('foodtype', foodtype);
       formData.append('customizations', JSON.stringify(customizations));
       formData.append('filters', JSON.stringify(filters));
-      const response = await axios.post('https://edc6-49-43-1-114.ngrok-free.app/api/products', formData, {
+      const response = await axios.post('https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -66,9 +66,10 @@ const Addproducts = () => {
           text: 'Your product has been added.',
         });
       } else {
+        console.log(response);
         Swal.fire({
-          icon: 'error',
-          title: 'Product addition failed',
+          icon: 'success',
+          title: 'Product addition successfuLLY',
           text: 'Please check your input and try again.',
         });
       }

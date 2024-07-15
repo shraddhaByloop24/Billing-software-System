@@ -13,7 +13,7 @@ const Productlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://edc6-49-43-1-114.ngrok-free.app/api/getproducts', 
+        const response = await axios.get('https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/getproducts', 
           {
             headers: {
               'ngrok-skip-browser-warning': '69420'
@@ -35,7 +35,7 @@ const Productlist = () => {
   const handleDeleteClick = async (productId) => {
     
     try {
-      await axios.delete(`https://edc6-49-43-1-114.ngrok-free.app/api/products/${productId}`, 
+      await axios.delete(`https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/products/${productId}`, 
         {
           headers: {
             'ngrok-skip-browser-warning': '69420'

@@ -32,7 +32,7 @@ const Editmenu = () => {
       formData.append('image', image);
     }
     try {
-      const response = await axios.put(`https://cb05-2405-201-301d-f871-95e9-8d7e-6542-3445.ngrok-free.app/api/products/${id}`, formData, {
+      const response = await axios.put(`https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/products/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
