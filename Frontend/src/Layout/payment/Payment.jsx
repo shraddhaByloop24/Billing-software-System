@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../dashboard/Header';
 import axios from 'axios';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import './payment.css';
 
 
@@ -70,6 +72,7 @@ const Payment = () => {
             total: item.baseprice * item.quantity,
         }));
 
+       
         axios.post('https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/createorder', { items: tableData })
             .then(response => {
                 console.log(response);
@@ -77,6 +80,33 @@ const Payment = () => {
             .catch(error => {
                 console.error(error);
             });
+    };
+
+    const handleDownloadPDF = () => {
+        const doc = new jsPDF();
+        const tableColumn = ["S no", "Itemname", "Amount", "Quantity", "Total"];
+        const tableRows = [];
+
+        addorder.forEach((item, index) => {
+            const itemData = [
+                index + 1,
+                item.itemname,
+                item.baseprice,
+                item.quantity,
+                (item.baseprice * item.quantity).toFixed(2),
+            ];
+            tableRows.push(itemData);
+        });
+
+        const totalRow = ["", "", "", "Total", totalAmount.toFixed(2)];
+        tableRows.push(totalRow);
+
+        doc.autoTable({
+            head: [tableColumn],
+            body: tableRows,
+        });
+
+        doc.save('order_summary.pdf');
     };
 
     return (
@@ -167,9 +197,13 @@ const Payment = () => {
                                             </tr>
 
                                         </tbody>
+                                        <div className='text-right mx-3'>
+                                       
+                                    </div>
                                     </table>
                                     <div className='text-right mx-3'>
                                         <button className="btn custom-btn btn-13 px-2" onClick={handleGenerateBill}>Generate Bill</button>
+                                        <button className="btn custom-btn btn-13 px-2 mx-2" onClick={handleDownloadPDF}>Download Bill</button>
                                     </div>
                                 </div>
                             </div>
