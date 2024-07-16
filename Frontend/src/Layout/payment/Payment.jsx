@@ -14,7 +14,7 @@ const Payment = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/getproducts', {
+                const response = await axios.get('https://919c-2405-201-301d-f871-4c6c-29b0-4c7b-52d8.ngrok-free.app/api/getproducts', {
                     headers: {
                         'ngrok-skip-browser-warning': '69420'
                     }
@@ -72,8 +72,8 @@ const Payment = () => {
             total: item.baseprice * item.quantity,
         }));
 
-       
-        axios.post('https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/createorder', { items: tableData })
+
+        axios.post('https://919c-2405-201-301d-f871-4c6c-29b0-4c7b-52d8.ngrok-free.app/api/getproducts', { items: tableData })
             .then(response => {
                 console.log(response);
             })
@@ -150,7 +150,7 @@ const Payment = () => {
                             </div>
                             <div className="col-lg-6 d-block">
                                 <div className="w-100 shadow d-block">
-                                    <h5 className="pt-2 bg-light p-3">Billing here</h5>
+                                    <h5 className="pt-2 Billing-here text-white p-3">BILLING HERE</h5>
                                     <table className="table">
                                         <thead>
                                             <tr className=''>
@@ -173,11 +173,11 @@ const Payment = () => {
                                                     </td>
                                                     <td><input type="text" className='border-none' value={item.baseprice} /></td>
                                                     <td>
-                                                        <i className="fa-solid fa-minus p-2 bg-danger text-white mx-1" onClick={() => decrement(index)}></i>
-                                                        <input type="text" className='border-none text-center' value={item.quantity}
+                                                        <i className="fa-solid fa-minus p-2 bg-danger border  text-white" onClick={() => decrement(index)}></i>
+                                                        <input type="text" className='counter-border   text-center' value={item.quantity}
 
                                                         />
-                                                        <i className="fa-solid fa-plus p-2  bg-danger text-white" onClick={() => increment(index)}></i>
+                                                        <i className="fa-solid fa-plus p-2  bg-danger border text-white" onClick={() => increment(index)}></i>
                                                     </td>
                                                     <td>
                                                         <input type="text" className='border-none text-center'
@@ -191,19 +191,41 @@ const Payment = () => {
                                                 <th scope="row" colSpan="4">Total</th>
                                                 <td>
                                                     <input type="text" className='border-none text-center'
-                                                     value={totalAmount} />
+                                                        value={totalAmount} />
                                                 </td>
 
                                             </tr>
 
                                         </tbody>
                                         <div className='text-right mx-3'>
-                                       
-                                    </div>
+
+                                        </div>
                                     </table>
-                                    <div className='text-right mx-3'>
-                                        <button className="btn custom-btn btn-13 px-2" onClick={handleGenerateBill}>Generate Bill</button>
-                                        <button className="btn custom-btn btn-13 px-2 mx-2" onClick={handleDownloadPDF}>Download Bill</button>
+                                    <div>
+                                        <section className="section section--valo py-3">
+                                            {/* <h2 class="section__title">
+      Valo
+    </h2> */}
+                                            <div className="toggle-button toggle-button--valo">
+                                                <input id="toggleButton1" name="radio1" type="radio" />
+                                                <label for="toggleButton1" data-text="Cash"></label>
+                                                <div className="toggle-button__icon"></div>
+                                            </div>
+                                            <div className="toggle-button toggle-button--valo">
+                                                <input id="toggleButton2" name="radio1" type="radio" />
+                                                <label for="toggleButton2" data-text="UPI"></label>
+                                                <div className="toggle-button__icon"></div>
+                                            </div>
+                                            <div className="toggle-button toggle-button--valo">
+                                                <input id="toggleButton3" name="radio1" type="radio" />
+                                                <label for="toggleButton3" data-text="Card"></label>
+                                                <div className="toggle-button__icon"></div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div className=' mx-3'>
+                                        <button className="btn custom-btn bg-info text-white px-2" onClick={handleGenerateBill}>Generate Bill</button>
+                                        <button className="btn custom-btn bg-danger text-white  px-2 mx-2" onClick={handleDownloadPDF}>Download Bill</button>
                                     </div>
                                 </div>
                             </div>

@@ -35,7 +35,7 @@ const Productlist = () => {
   const handleDeleteClick = async (productId) => {
     
     try {
-      await axios.delete(`https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/products/${productId}`, 
+      await axios.delete(`https://919c-2405-201-301d-f871-4c6c-29b0-4c7b-52d8.ngrok-free.app/api/products/${productId}`, 
         {
           headers: {
             'ngrok-skip-browser-warning': '69420'
