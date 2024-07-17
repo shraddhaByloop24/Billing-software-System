@@ -125,7 +125,9 @@
   .toggle-button--valo label:before {
     content: attr(data-text); }
 
-.toggle-button--valo input:checked ~ .toggle-button__icon:after {
+.to
+
+ggle-button--valo input:checked ~ .toggle-button__icon:after {
   transform: translate(0, 0);
   animation: show .2s; }
 

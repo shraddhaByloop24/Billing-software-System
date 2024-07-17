@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom'
 import './floatChart.css'
 import Backbtn from './Backbtn';
+
+
 const Chart = () => {
+
+
+
   return (
     <>
       {/* Cards */}
@@ -49,6 +54,8 @@ const Chart = () => {
               <div className="row p-3 ">
                 <div className="col-lg-10 ">
                   <h3>Lets make a Bill</h3>
+               
+
                   <p className='pt-2'>Lorem ipsum dolor, sit amet consectetur <br />adipisicing elit. Ex ipsum velit asperiores reiciendis voluptas sapiente. </p>
                 </div>
                 <div className="col-lg-2">
