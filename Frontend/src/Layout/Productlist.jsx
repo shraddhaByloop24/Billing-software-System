@@ -13,7 +13,7 @@ const Productlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://7101-2405-201-301d-f871-95e1-9522-ec6a-ea3f.ngrok-free.app/api/getproducts', 
+        const response = await axios.get('https://e12e-2405-201-301d-f871-18c-12d1-8ce-4b44.ngrok-free.app/api/getproducts', 
           {
             headers: {
               'ngrok-skip-browser-warning': '69420'
@@ -35,7 +35,7 @@ const Productlist = () => {
   const handleDeleteClick = async (productId) => {
     
     try {
-      await axios.delete(`https://919c-2405-201-301d-f871-4c6c-29b0-4c7b-52d8.ngrok-free.app/api/products/${productId}`, 
+      await axios.delete(`https://e12e-2405-201-301d-f871-18c-12d1-8ce-4b44.ngrok-free.app/api/products/${productId}`, 
         {
           headers: {
             'ngrok-skip-browser-warning': '69420'
@@ -93,7 +93,7 @@ const Productlist = () => {
                     <h1 className="card-title heading mb-0">Product List Table</h1>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control mt-4 w-50"
                       placeholder="Search by item name"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}

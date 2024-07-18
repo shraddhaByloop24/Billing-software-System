@@ -1,9 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
-/* @import url(icons/font-awesome/css/fontawesome-all.css);
-@import url(icons/themify-icons/themify-icons.css);
-@import url(icons/material-design-iconic-font/css/materialdesignicons.min.css); */
+
 
 .search-box .app-search .form-control {
     border-radius: 0px
@@ -17,12 +12,7 @@
     -moz-transform: rotate(45deg)
 }
 
-/*!
- * Bootstrap v4.5.2 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 :root {
     --blue: #2255a4;
     --indigo: #6610f2;
@@ -65,8 +55,7 @@
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1600px;
-    --font-family-sans-serif: "Nunito Sans", sans-serif;
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+
 }
 
 *,
@@ -76,12 +65,6 @@
     box-sizing: border-box
 }
 
-html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-}
 
 article,
 aside,
@@ -96,20 +79,6 @@ section {
     display: block
 }
 
-body {
-    margin: 0;
-    font-family: "Nunito Sans", sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #d9ebfb ;
-    text-align: left;
-    background-color: #eeeeee
-}
-
-[tabindex="-1"]:focus:not(:focus-visible) {
-    outline: 0 !important
-}
 
 hr {
     -webkit-box-sizing: content-box;

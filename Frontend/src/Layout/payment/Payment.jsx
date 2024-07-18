@@ -14,7 +14,7 @@ const Payment = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://919c-2405-201-301d-f871-4c6c-29b0-4c7b-52d8.ngrok-free.app/api/getproducts', {
+                const response = await axios.get('https://e12e-2405-201-301d-f871-18c-12d1-8ce-4b44.ngrok-free.app/api/getproducts', {
                     headers: {
                         'ngrok-skip-browser-warning': '69420'
                     }
@@ -73,7 +73,7 @@ const Payment = () => {
         }));
 
 
-        axios.post('https://919c-2405-201-301d-f871-4c6c-29b0-4c7b-52d8.ngrok-free.app/api/getproducts', { items: tableData })
+        axios.post('https://e12e-2405-201-301d-f871-18c-12d1-8ce-4b44.ngrok-free.app/api/createorder', { items: tableData })
             .then(response => {
                 console.log(response);
             })
